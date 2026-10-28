@@ -1,20 +1,24 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en" data-theme="light">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Stand-Up Wrapped - Financial Times style editorial data overview of team daily standup attendance.">
+  <meta name="description"
+    content="Stand-Up Wrapped - Financial Times style editorial data overview of team daily standup attendance.">
   <title>Stand-Up Wrapped</title>
-  <link rel="stylesheet" href="style.css?v=51">
+  <link rel="stylesheet" href="style.css?v=56">
   <!-- Chart.js CDN -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
 </head>
+
 <body>
   <div class="app-container">
     <!-- Top Editorial Line -->
     <div class="top-brand-bar">
       <span>Stand-Up Wrapped &nbsp;|&nbsp; Team Analytics</span>
-      <button class="theme-toggle-link theme-toggle-automaton-btn" id="theme-toggle-btn" onclick="toggleTheme()" aria-label="Toggle theme">
+      <button class="theme-toggle-link theme-toggle-automaton-btn" id="theme-toggle-btn" onclick="toggleTheme()"
+        aria-label="Toggle theme">
         <span class="theme-wave-icon" aria-hidden="true">
           <svg viewBox="0 0 26 15" width="22" height="13" class="mini-automaton-svg">
             <path class="mini-wave-3" d="M0,5 Q3.2,1.5 6.5,5 T13,5 T19.5,5 T26,5 L26,15 L0,15 Z" />
@@ -30,8 +34,8 @@
     <header class="app-header">
       <h1 class="header-title">Stand-Up Wrapped</h1>
       <p class="header-subtitle">
-        An empirical review of team attendance patterns, group dynamics, and speaking turns across 
-        <strong id="header-total-standups">317</strong> sessions.
+        A look back at team attendance, habits, and speaking turns across
+        <strong id="header-total-standups">317</strong> standups.
       </p>
     </header>
 
@@ -40,7 +44,7 @@
       <span class="subsection-tag">Section 1</span>
       <h2 class="subsection-title">Daily Attendance Tracker</h2>
       <p class="subsection-desc">
-        Daily headcount variations and overall participant frequency from April 2025 to September 2026.
+        Daily turnout and headcount from April 2025 to September 2026.
       </p>
     </section>
 
@@ -77,7 +81,7 @@
             Headcount Over Time
           </button>
           <button class="tab-btn" data-view="distribution" id="btn-view-distribution" role="tab" aria-selected="false">
-            Size Frequency
+            Standup Sizes
           </button>
           <button class="tab-btn" data-view="ranking" id="btn-view-ranking" role="tab" aria-selected="false">
             Attendance by Person
@@ -169,7 +173,7 @@
         <span class="subsection-tag">Section 2</span>
         <h2 class="subsection-title">Personal Profiles</h2>
         <p class="subsection-desc">
-          Individual attendance trajectories, streak records, and personal Wrapped retrospectives across 303 team standups.
+          Attendance stats, streaks, and habits for each team member across 303 standups.
         </p>
       </div>
 
@@ -230,10 +234,10 @@
         </div>
       </div>
 
-      <!-- Monthly Attendance Trajectory (Kept) -->
+      <!-- Monthly Attendance (Kept) -->
       <div class="profile-card-block profile-monthly-full" id="profile-monthly-block">
         <div class="block-header">
-          <span class="block-title">Monthly Attendance Trajectory (2025 – 2026)</span>
+          <span class="block-title">Monthly Attendance (2025 – 2026)</span>
           <span class="block-badge">17 Active Months</span>
         </div>
         <div class="monthly-rhythm-matrix" id="profile-monthly-matrix">
@@ -241,12 +245,12 @@
         </div>
       </div>
 
-      <!-- Passing the Baton: Nomination Dynamics -->
+      <!-- Passing the Baton -->
       <div class="profile-card-block profile-picks-section" id="profile-picks-block">
         <div class="block-header picks-block-header">
           <div>
-            <span class="block-title">Passing the Baton: Nomination Dynamics</span>
-            <span class="block-sub" id="profile-picks-sub">Who you voluntarily call on vs. who you leave for last</span>
+            <span class="block-title">Passing the Baton</span>
+            <span class="block-sub" id="profile-picks-sub">Who you pick first vs. who you leave for last</span>
           </div>
           <div class="picks-header-stats" id="profile-picks-stats">
             <!-- Dynamically populated stats -->
@@ -256,11 +260,13 @@
         <!-- Section 2 Navigation Tabs -->
         <div class="chart-nav-row s2-nav-row">
           <div class="view-tabs" role="tablist" aria-label="Nomination dynamics views">
-            <button type="button" class="tab-btn active" data-s2-view="personal" id="btn-s2-personal" role="tab" aria-selected="true">
-              Personal Closeness Index
+            <button type="button" class="tab-btn active" data-s2-view="personal" id="btn-s2-personal" role="tab"
+              aria-selected="true">
+              Closeness Ranking
             </button>
-            <button type="button" class="tab-btn" data-s2-view="heatmap" id="btn-s2-heatmap" role="tab" aria-selected="false">
-              Nomination Heatmap
+            <button type="button" class="tab-btn" data-s2-view="heatmap" id="btn-s2-heatmap" role="tab"
+              aria-selected="false">
+              Passing Heatmap
             </button>
           </div>
         </div>
@@ -272,11 +278,11 @@
             <div class="picks-sort-pills" id="picks-sort-controls" role="group" aria-label="Sort nominees">
               <span class="sort-label">Sort by:</span>
               <button type="button" class="sort-btn active" data-sort="weighted">Closeness Score</button>
-              <button type="button" class="sort-btn" data-sort="raw">Raw Count</button>
+              <button type="button" class="sort-btn" data-sort="raw">Total Picks</button>
               <button type="button" class="sort-btn" data-sort="diff" id="sort-picks-diff">Diff vs Expected</button>
             </div>
             <div class="picks-legend">
-              <span class="legend-item"><span class="legend-box raw-box"></span> Raw Nominations</span>
+              <span class="legend-item"><span class="legend-box raw-box"></span> Total Picks</span>
               <span class="legend-item"><span class="legend-box weighted-box"></span> Closeness Score</span>
             </div>
           </div>
@@ -286,14 +292,16 @@
           </div>
 
           <div class="block-footnote picks-footnote">
-            <strong>The Closeness Index:</strong> Standup handoffs reveal true closeness. If you call on someone early as Speaker #1 (full room available), they earn maximum points (<strong>💘 Office Crush</strong> territory). If you only ever pass to them near the end when nobody else is left, they earn minimum points (<strong>⚔️ Arch Enemy</strong> territory). The difference vs expected indicates how many more (+) or fewer (-) times you nominated them compared to random chance.
+            <strong>How it works:</strong> Picking someone early when many people are available earns top points.
+            Picking someone at the end because no one else is left earns the lowest score. <strong>Diff vs
+              Expected</strong> shows whether you pick them more (+) or less (−) often than chance.
             <div class="emoji-legend-row">
               <span>💘 <strong>Office Crush:</strong> Rank #1 pick</span>
               <span>🤝 <strong>Work Bestie:</strong> Go-to early pick</span>
               <span>☕ <strong>Desk Neighbor:</strong> Regular rotation</span>
               <span>👔 <strong>Neutral Terms:</strong> Standard coworker</span>
               <span>😬 <strong>Last Resort:</strong> Picked when running low on options</span>
-              <span>⚔️ <strong>Arch Enemy:</strong> Only picked when forced at gunpoint</span>
+              <span>⚔️ <strong>Arch Enemy:</strong> Only picked when no one else is left</span>
             </div>
           </div>
         </div>
@@ -304,9 +312,11 @@
           <div class="chart-subcontrols heatmap-subcontrols" id="heatmap-controls">
             <div class="filter-links">
               <span class="filter-prefix">Heatmap Metric:</span>
-              <button type="button" class="filter-link-btn active" data-heatmap-metric="weighted" id="heatmap-toggle-weighted">Closeness Score (Weighted)</button>
+              <button type="button" class="filter-link-btn active" data-heatmap-metric="weighted"
+                id="heatmap-toggle-weighted">Closeness Score</button>
               <span class="filter-sep">/</span>
-              <button type="button" class="filter-link-btn" data-heatmap-metric="raw" id="heatmap-toggle-raw">Raw Counts</button>
+              <button type="button" class="filter-link-btn" data-heatmap-metric="raw" id="heatmap-toggle-raw">Total
+                Picks</button>
             </div>
             <div class="heatmap-legend-inline">
               <span class="legend-scale-label">0</span>
@@ -338,12 +348,13 @@
           <div class="inspection-row" id="s2-inspection-bar" style="margin-top: 14px;">
             <span class="inspection-label">Data Note</span>
             <div class="inspection-body" id="s2-inspection-content">
-              Hover over any matrix cell to inspect pair closeness, raw count, and difference from expected picks.
+              Hover over any cell to see how often two people pass to each other.
             </div>
           </div>
 
           <div class="block-footnote picks-footnote" style="margin-top: 14px;">
-            <strong>Team Nomination Matrix:</strong> Shows every pairwise handoff across all 303 standup sessions. Rows represent the speaker passing the baton; columns represent who they called on. Hover over any cell to see that pair's breakdown or click any row to focus on that speaker's full handoff profile.
+            <strong>How to read this:</strong> Rows show who passed the baton; columns show who was picked. Darker cells
+            mean more frequent handoffs. Click any row to see that person's picks.
           </div>
         </div>
       </div>
@@ -356,9 +367,9 @@
       <!-- Section Header -->
       <div class="subsection-header section-divider-top">
         <span class="subsection-tag">Section 3</span>
-        <h2 class="subsection-title" id="sec3-title">Mutual Chemistry: Bidirectional Network</h2>
+        <h2 class="subsection-title" id="sec3-title">Mutual Chemistry</h2>
         <p class="subsection-desc">
-          Who forms standup's strongest mutual partnerships? Evaluating reciprocal baton passes normalized against co-attendance opportunities.
+          Who picks each other the most? Measuring two-way passing between pairs who attend the same standups.
         </p>
       </div>
 
@@ -375,7 +386,7 @@
           <span class="stat-subtext" id="s3-balanced-detail">Loading...</span>
         </div>
         <div class="stat-item" id="s3-stat-unrequited">
-          <span class="stat-label">💔 Most Asymmetric Link</span>
+          <span class="stat-label">💔 Most One-Sided Pair</span>
           <div class="stat-value s3-stat-names" id="s3-unrequited-names">—</div>
           <span class="stat-subtext" id="s3-unrequited-detail">Loading...</span>
         </div>
@@ -391,16 +402,19 @@
         <!-- Card Header with Controls -->
         <div class="block-header s3-block-header">
           <div class="s3-title-wrap">
-            <span class="block-title">Reciprocal Nomination Web</span>
-            <span class="block-sub">Line thickness indicates mutual picks above expected co-attendance baseline; click any member node to isolate their reciprocal links.</span>
+            <span class="block-title">Two-Way Passing Web</span>
+            <span class="block-sub">Thicker lines mean two people pick each other more than expected. Click a name to
+              see their links.</span>
           </div>
 
           <!-- Controls: Filter Pills & Focus Member -->
           <div class="s3-controls-row">
             <div class="s3-filter-group" role="group" aria-label="Filter links">
               <span class="filter-prefix">Links:</span>
-              <button type="button" class="filter-link-btn active" data-s3-filter="top" id="s3-filter-top">Top Duos (Δ ≥ +5)</button>
-              <button type="button" class="filter-link-btn" data-s3-filter="positive" id="s3-filter-positive">All Favorites (Δ > 0)</button>
+              <button type="button" class="filter-link-btn active" data-s3-filter="top" id="s3-filter-top">Top Duos (Δ ≥
+                +5)</button>
+              <button type="button" class="filter-link-btn" data-s3-filter="positive" id="s3-filter-positive">All
+                Favorites (Δ > 0)</button>
               <button type="button" class="filter-link-btn" data-s3-filter="all" id="s3-filter-all">Full Web</button>
             </div>
             <div class="s3-member-filter">
@@ -419,7 +433,7 @@
           <!-- Canvas Graph Container -->
           <div class="chart-canvas-wrapper s3-canvas-wrapper" id="s3-canvas-wrapper">
             <canvas id="mutual-network-canvas" class="mutual-canvas" width="600" height="560"></canvas>
-            
+
             <!-- Canvas Overlay Tooltip (Zero Jitter) -->
             <div id="s3-canvas-tooltip" class="s3-tooltip" style="display: none;"></div>
           </div>
@@ -443,467 +457,265 @@
         <div class="inspection-row s3-inspection-bar" id="s3-inspection-bar" style="margin-top: 14px;">
           <span class="inspection-label">Data Note</span>
           <div class="inspection-body" id="s3-inspection-content">
-            Hover over any teammate node or link line to inspect mutual nominations, expected co-attendance baseline, and reciprocity balance.
+            Hover over any person or line to see two-way picks, expected handoffs, and balance.
           </div>
         </div>
 
         <!-- Footnote -->
         <div class="block-footnote s3-footnote" style="margin-top: 14px;">
-          <strong>Bidirectional Methodology:</strong> Analyzes all 136 pairwise combinations. Expected mutual picks are calculated from co-attended sessions where each member had an active baton-passing turn: <code>Exp = Σ [1 / (Nd - 1)]</code>. Difference vs Expected (Δ) reveals genuine mutual intentionality rather than attendance coincidence. Reciprocity Balance measures the symmetry between directional handoffs (A → B vs. B → A).
+          <strong>How it works:</strong> We compare how often two people pick each other to what you would expect by
+          chance on days they were both there. <strong>Difference (Δ)</strong> shows real preference over coincidence.
+          <strong>Balance</strong> shows whether passes flow equally both ways (50/50) or mostly one way.
         </div>
       </div>
-    <!-- ========================================== -->
-    <!-- SECTION 4: Teacher's Pet Dynamics          -->
-    <!-- ========================================== -->
-    <section class="section-container" id="section-teachers-pet">
-      <!-- Section Header -->
-      <div class="subsection-header section-divider-top">
-        <span class="subsection-tag">Section 4</span>
-        <h2 class="subsection-title">Teacher's Pet Analysis</h2>
-        <p class="subsection-desc">
-          An empirical review of who hands off to leadership (Will or Luke), normalized for co-attendance opportunity and speaking turn freedom.
-        </p>
-      </div>
+      <!-- ========================================== -->
+      <!-- SECTION 4: Teacher's Pet Dynamics          -->
+      <!-- ========================================== -->
+      <section class="section-container" id="section-teachers-pet">
+        <!-- Section Header -->
+        <div class="subsection-header section-divider-top">
+          <span class="subsection-tag">Section 4</span>
+          <h2 class="subsection-title">Teacher's Pet Analysis</h2>
+          <p class="subsection-desc">
+            Who calls on Will and Luke the most, adjusted for how often they attend together and how early in the
+            standup they pick.
+          </p>
+        </div>
 
-      <!-- Section 4 KPI Strip -->
-      <div class="stat-strip s4-stat-strip" id="s4-stat-strip" aria-label="Teachers pet key metrics">
-        <div class="stat-item">
-          <span class="stat-label">Total Teacher Handoffs</span>
-          <div class="stat-value" id="s4-kpi-total">—</div>
-          <span class="stat-subtext" id="s4-kpi-total-sub">187 for Will • 172 for Luke</span>
-        </div>
-        <div class="stat-item">
-          <span class="stat-label">#1 Teacher's Pet</span>
-          <div class="stat-value highlight-red" id="s4-kpi-top-pet">—</div>
-          <span class="stat-subtext" id="s4-kpi-top-pet-sub">37 picks • 25.5% conversion</span>
-        </div>
-        <div class="stat-item">
-          <span class="stat-label">Top Opportunity Affinity</span>
-          <div class="stat-value highlight-blue" id="s4-kpi-top-affinity">—</div>
-          <span class="stat-subtext" id="s4-kpi-top-affinity-sub">62.7% early freedom score</span>
-        </div>
-        <div class="stat-item">
-          <span class="stat-label">The Class Rebel</span>
-          <div class="stat-value" id="s4-kpi-rebel">—</div>
-          <span class="stat-subtext" id="s4-kpi-rebel-sub">Only 7.7% conversion in 142 opps</span>
-        </div>
-      </div>
-
-      <!-- Main Section 4 Content Block -->
-      <div class="profile-card-block s4-main-block" id="s4-main-block">
-        <div class="block-header s4-block-header">
-          <div>
-            <span class="block-title">Teacher's Pet Dynamics: Leadership Handoffs</span>
-            <span class="block-sub">Measuring intentionality vs chance: early voluntary nomination vs forced late selection</span>
+        <!-- Section 4 KPI Strip -->
+        <div class="stat-strip s4-stat-strip" id="s4-stat-strip" aria-label="Teachers pet key metrics">
+          <div class="stat-item">
+            <span class="stat-label">Total Teacher Handoffs</span>
+            <div class="stat-value" id="s4-kpi-total">—</div>
+            <span class="stat-subtext" id="s4-kpi-total-sub">187 for Will • 172 for Luke</span>
           </div>
-          <div class="s4-header-badge" id="s4-header-badge">
-            <span class="badge-pill">Will: 216 Sessions</span>
-            <span class="badge-pill">Luke: 190 Sessions</span>
+          <div class="stat-item">
+            <span class="stat-label">#1 Teacher's Pet</span>
+            <div class="stat-value highlight-red" id="s4-kpi-top-pet">—</div>
+            <span class="stat-subtext" id="s4-kpi-top-pet-sub">37 picks • 25.5% conversion</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">Top Choice Affinity</span>
+            <div class="stat-value highlight-blue" id="s4-kpi-top-affinity">—</div>
+            <span class="stat-subtext" id="s4-kpi-top-affinity-sub">62.7% pick freedom score</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">The Class Rebel</span>
+            <div class="stat-value" id="s4-kpi-rebel">—</div>
+            <span class="stat-subtext" id="s4-kpi-rebel-sub">Only 7.7% conversion in 142 opps</span>
           </div>
         </div>
 
-        <!-- Section 4 Navigation Tabs -->
-        <div class="chart-nav-row s4-nav-row">
-          <div class="view-tabs" role="tablist" aria-label="Teachers pet views">
-            <button type="button" class="tab-btn active" data-s4-view="leaderboard" id="btn-s4-leaderboard" role="tab" aria-selected="true">
-              Teacher's Pet Index
-            </button>
-            <button type="button" class="tab-btn" data-s4-view="comparison" id="btn-s4-comparison" role="tab" aria-selected="false">
-              Will vs. Luke Dynamics
-            </button>
-            <button type="button" class="tab-btn" data-s4-view="timing" id="btn-s4-timing" role="tab" aria-selected="false">
-              Turn Freedom & Timing
-            </button>
-          </div>
-        </div>
-
-        <!-- TAB 1: Teacher's Pet Index (Leaderboard + Inspector) -->
-        <div id="s4-view-leaderboard" class="s4-view-panel">
-          <!-- Filter Toolbar (Ordered by Actual vs Expected) -->
-          <div class="s4-toolbar">
-            <div class="s4-filter-group" role="group" aria-label="Target Teacher Filter">
-              <span class="filter-prefix">Target:</span>
-              <button type="button" class="filter-link-btn active" data-s4-target="either" id="s4-target-either">Both (Will & Luke)</button>
-              <button type="button" class="filter-link-btn" data-s4-target="will" id="s4-target-will">Will Only</button>
-              <button type="button" class="filter-link-btn" data-s4-target="luke" id="s4-target-luke">Luke Only</button>
+        <!-- Main Section 4 Content Block -->
+        <div class="profile-card-block s4-main-block" id="s4-main-block">
+          <div class="block-header s4-block-header">
+            <div>
+              <span class="block-title">Teacher's Pet Ranking</span>
+              <span class="block-sub">Separates voluntary early picks from forced picks when Will or Luke are the only
+                ones left.</span>
             </div>
-            <span class="s4-ranking-order-label">Ordered by Actual vs. Expected (Δ)</span>
+            <div class="s4-header-badge" id="s4-header-badge">
+              <span class="badge-pill">Will: 216 Sessions</span>
+              <span class="badge-pill">Luke: 190 Sessions</span>
+            </div>
           </div>
 
-          <!-- Layout: Leaderboard Table on Left + Inspector Sidebar on Right -->
-          <div class="chart-layout-row s4-layout-row">
-            <!-- Left: Leaderboard Cards / Rows -->
-            <div class="s4-leaderboard-container" id="s4-leaderboard-container">
-              <div class="s4-table-header">
-                <span class="col-rank">#</span>
-                <span class="col-member">Teammate & Archetype</span>
-                <span class="col-opps">Opportunities</span>
-                <span class="col-picks">Actual / Exp (Δ)</span>
-                <span class="col-rate">Conv. Rate</span>
-                <span class="col-freedom">Avg Freedom</span>
-                <span class="col-fav">Preference</span>
+          <!-- Section 4 Navigation Tabs -->
+          <div class="chart-nav-row s4-nav-row">
+            <div class="view-tabs" role="tablist" aria-label="Teachers pet views">
+              <button type="button" class="tab-btn active" data-s4-view="leaderboard" id="btn-s4-leaderboard" role="tab"
+                aria-selected="true">
+                Teacher's Pet Index
+              </button>
+              <button type="button" class="tab-btn" data-s4-view="comparison" id="btn-s4-comparison" role="tab"
+                aria-selected="false">
+                Will vs. Luke
+              </button>
+              <button type="button" class="tab-btn" data-s4-view="timing" id="btn-s4-timing" role="tab"
+                aria-selected="false">
+                Turn Timing
+              </button>
+            </div>
+          </div>
+
+          <!-- TAB 1: Teacher's Pet Index (Leaderboard + Inspector) -->
+          <div id="s4-view-leaderboard" class="s4-view-panel">
+            <!-- Filter Toolbar (Ordered by Actual vs Expected) -->
+            <div class="s4-toolbar">
+              <div class="s4-filter-group" role="group" aria-label="Target Teacher Filter">
+                <span class="filter-prefix">Target:</span>
+                <button type="button" class="filter-link-btn active" data-s4-target="either" id="s4-target-either">Both
+                  (Will & Luke)</button>
+                <button type="button" class="filter-link-btn" data-s4-target="will" id="s4-target-will">Will
+                  Only</button>
+                <button type="button" class="filter-link-btn" data-s4-target="luke" id="s4-target-luke">Luke
+                  Only</button>
               </div>
-              <div class="s4-rows-wrap" id="s4-rows-wrap">
-                <!-- Dynamically populated rows -->
-              </div>
+              <span class="s4-ranking-order-label">Ordered by Actual vs. Expected (Δ)</span>
             </div>
 
-            <!-- Right: Member Inspector Card (Sticky) -->
-            <aside class="s4-inspector-sidebar" id="s4-inspector-sidebar" aria-label="Member deep-dive inspector">
-              <div class="s4-inspector-header">
-                <span class="s4-inspector-title">Member Profile</span>
-                <span class="s4-inspector-tag" id="s4-inspector-target-label">Target: Both</span>
+            <!-- Layout: Leaderboard Table on Left + Inspector Sidebar on Right -->
+            <div class="chart-layout-row s4-layout-row">
+              <!-- Left: Leaderboard Cards / Rows -->
+              <div class="s4-leaderboard-container" id="s4-leaderboard-container">
+                <div class="s4-table-header">
+                  <span class="col-rank">#</span>
+                  <span class="col-member">Teammate & Archetype</span>
+                  <span class="col-opps">Opportunities</span>
+                  <span class="col-picks">Actual / Exp (Δ)</span>
+                  <span class="col-rate">Pick Rate</span>
+                  <span class="col-freedom">Avg Freedom</span>
+                  <span class="col-fav">Preference</span>
+                </div>
+                <div class="s4-rows-wrap" id="s4-rows-wrap">
+                  <!-- Dynamically populated rows -->
+                </div>
               </div>
-              <div class="s4-inspector-body" id="s4-inspector-body">
-                <!-- Populated dynamically when clicking any member -->
-              </div>
-            </aside>
+
+              <!-- Right: Member Inspector Card (Sticky) -->
+              <aside class="s4-inspector-sidebar" id="s4-inspector-sidebar" aria-label="Member deep-dive inspector">
+                <div class="s4-inspector-header">
+                  <span class="s4-inspector-title">Member Profile</span>
+                  <span class="s4-inspector-tag" id="s4-inspector-target-label">Target: Both</span>
+                </div>
+                <div class="s4-inspector-body" id="s4-inspector-body">
+                  <!-- Populated dynamically when clicking any member -->
+                </div>
+              </aside>
+            </div>
+          </div>
+
+          <!-- TAB 2: Will vs Luke Dynamics -->
+          <div id="s4-view-comparison" class="s4-view-panel" style="display: none;">
+            <div class="s4-comparison-grid" id="s4-comparison-grid">
+              <!-- Populated dynamically: Will's Camp vs Faculty Alliance vs Luke's Camp -->
+            </div>
+          </div>
+
+          <!-- TAB 3: Turn Freedom & Timing Breakdown -->
+          <div id="s4-view-timing" class="s4-view-panel" style="display: none;">
+            <div class="s4-timing-wrap" id="s4-timing-wrap">
+              <!-- Populated dynamically: Early vs Mid vs Late Forced Picks breakdown -->
+            </div>
+          </div>
+
+          <!-- Static Editorial Inspection Bar -->
+          <div class="inspection-row s4-inspection-bar" id="s4-inspection-bar" style="margin-top: 14px;">
+            <span class="inspection-label">Data Note</span>
+            <div class="inspection-body" id="s4-inspection-content">
+              Click on any teammate to see their chances, turn timing, and whether they favor Will or Luke.
+            </div>
+          </div>
+
+          <!-- Footnote -->
+          <div class="block-footnote s4-footnote" style="margin-top: 14px;">
+            <strong>How it works:</strong> We count how often people pick Will or Luke.
+            <em>Chances:</em> You can only pick them if you both attend and they haven't spoken yet.
+            <em>Timing:</em> Picking them early is a real choice. Picking them last is forced.
+            <em>Expected:</em> What chance alone would predict. <strong>Difference (Δ)</strong> shows real preference.
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================== -->
+      <!-- SECTION 5: Mistakes (picked someone who already went) -->
+      <!-- ========================================== -->
+      <section class="section-container" id="section-mistakes">
+        <div class="subsection-header section-divider-top">
+          <span class="subsection-tag">Section 5</span>
+          <h2 class="subsection-title">Mistakes</h2>
+          <p class="subsection-desc">
+            When someone accidentally picks a teammate who has already spoken. Later turns carry higher risk, so each
+            person is compared to what you would expect for their turn positions.
+          </p>
+        </div>
+
+        <div class="stat-strip s6-stat-strip" id="s6-stat-strip" aria-label="Mistake key metrics">
+          <div class="stat-item">
+            <span class="stat-label">Total Slip-Ups</span>
+            <div class="stat-value" id="s6-kpi-total">—</div>
+            <span class="stat-subtext" id="s6-kpi-total-sub"></span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">Most Slip-Ups</span>
+            <div class="stat-value highlight-red" id="s6-kpi-top">—</div>
+            <span class="stat-subtext" id="s6-kpi-top-sub"></span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">Sessions Affected</span>
+            <div class="stat-value highlight-blue" id="s6-kpi-sessions">—</div>
+            <span class="stat-subtext" id="s6-kpi-sessions-sub"></span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">Zero Mistakes</span>
+            <div class="stat-value" id="s6-kpi-clean">—</div>
+            <span class="stat-subtext" id="s6-kpi-clean-sub"></span>
           </div>
         </div>
 
-        <!-- TAB 2: Will vs Luke Dynamics -->
-        <div id="s4-view-comparison" class="s4-view-panel" style="display: none;">
-          <div class="s4-comparison-grid" id="s4-comparison-grid">
-            <!-- Populated dynamically: Will's Camp vs Faculty Alliance vs Luke's Camp -->
-          </div>
-        </div>
-
-        <!-- TAB 3: Turn Freedom & Timing Breakdown -->
-        <div id="s4-view-timing" class="s4-view-panel" style="display: none;">
-          <div class="s4-timing-wrap" id="s4-timing-wrap">
-            <!-- Populated dynamically: Early vs Mid vs Late Forced Picks breakdown -->
-          </div>
-        </div>
-
-        <!-- Static Editorial Inspection Bar -->
-        <div class="inspection-row s4-inspection-bar" id="s4-inspection-bar" style="margin-top: 14px;">
-          <span class="inspection-label">Data Note</span>
-          <div class="inspection-body" id="s4-inspection-content">
-            Click on any teammate row to inspect their exact opportunity conversion, speaking turn timing, and Will vs. Luke affinity.
-          </div>
-        </div>
-
-        <!-- Footnote -->
-        <div class="block-footnote s4-footnote" style="margin-top: 14px;">
-          <strong>Teacher's Pet Methodology:</strong> Evaluates handoffs specifically to Will and Luke across 303 standups. 
-          <em>1. Opportunity Normalization:</em> A member only has an opportunity to pick a teacher on days when both are present, the picker speaks <em>before</em> the teacher has already spoken, and the picker is not the final speaker.
-          <em>2. Position / Freedom Normalization:</em> Nominating a teacher on Turn #1 out of 10 available peers demonstrates 100% voluntary intentionality; nominating on Turn #11 when only Will or Luke remains is a forced pick (0% freedom).
-          <em>3. Expected Baseline:</em> Expected picks <code>Exp = Σ [1 / (Remaining Candidates)]</code>. Difference from Expected (Δ) isolates true favoritism from random baseline probability.
-        </div>
-      </div>
-    </section>
-
-    <!-- SECTION 5: Recurring Baton Chains (Strings of 3+) -->
-    <section class="section-container" id="section-recurring-chains">
-      <div class="subsection-header section-divider-top">
-        <span class="subsection-tag">Section 5</span>
-        <h2 class="subsection-title">Recurring Baton Chains: Sequence Mining</h2>
-        <p class="subsection-desc">
-          Detecting contiguous speaking orders of 3 or more teammates that repeated across 302 standup sessions. Explore frequent conversational trios, entrenched nomination pathways, reversible two-way handoff corridors, and record unbroken sequences.
-        </p>
-      </div>
-
-      <!-- Section 5 KPI Stat Strip -->
-      <div class="stat-strip s5-stat-strip" id="s5-stat-strip" aria-label="Sequence mining overview statistics">
-        <div class="stat-item">
-          <span class="stat-label">Top Co-Occurring Cluster</span>
-          <div class="stat-value highlight-red" id="s5-kpi-top-cluster">21 <span class="stat-unit">times</span></div>
-          <span class="stat-subtext" id="s5-kpi-top-cluster-sub">Bhumika & Sasha & Vishal (6 permutations)</span>
-        </div>
-        <div class="stat-item">
-          <span class="stat-label">Top Reversible Corridor</span>
-          <div class="stat-value highlight-blue" id="s5-kpi-top-grouped">10 <span class="stat-unit">times</span></div>
-          <span class="stat-subtext" id="s5-kpi-top-grouped-sub">Sasha ⇄ Bhumika ⇄ Vishal (5 fwd • 5 rev)</span>
-        </div>
-        <div class="stat-item">
-          <span class="stat-label">Most Frequent Chain</span>
-          <div class="stat-value" id="s5-kpi-top-chain">8 <span class="stat-unit">times</span></div>
-          <span class="stat-subtext" id="s5-kpi-top-chain-sub">Bhumika → Freya → Matt</span>
-        </div>
-        <div class="stat-item">
-          <span class="stat-label">Longest Unbroken Run</span>
-          <div class="stat-value highlight-blue" id="s5-kpi-longest-run">6 <span class="stat-unit">members</span></div>
-          <span class="stat-subtext" id="s5-kpi-longest-run-sub">Bhumika → … → Matt (2x repeated)</span>
-        </div>
-      </div>
-
-      <!-- Main Section 5 Content Block -->
-      <div class="profile-card-block s5-main-block" id="s5-main-block">
-        <div class="block-header s5-block-header">
-          <div>
-            <span class="block-title">Recurring Baton Sequences & Groupings</span>
-            <span class="block-sub">Uncovering entrenched contiguous nominations, reversible corridors, and co-occurring teammate clusters</span>
-          </div>
-          <div class="s5-header-badge" id="s5-header-badge">
-            <span class="badge-pill" id="s5-badge-cluster-count">2,849 Clusters</span>
-            <span class="badge-pill" id="s5-badge-grouped-count">975 Reversible Corridors</span>
-            <span class="badge-pill" id="s5-badge-directional-count">847 Directional Chains</span>
-          </div>
-        </div>
-
-        <!-- Navigation Tabs matching Sections 1-4 standard view-tabs -->
-        <div class="chart-nav-row s5-nav-row">
-          <div class="view-tabs" role="tablist" aria-label="Section 5 sequence views">
-            <button type="button" class="tab-btn active" data-s5-view="clusters" id="btn-s5-clusters" role="tab" aria-selected="true">
-              Speaking Groups (All Orders)
-            </button>
-            <button type="button" class="tab-btn" data-s5-view="grouped" id="btn-s5-grouped" role="tab" aria-selected="false">
-              Reversible Corridors (A⇄B⇄C)
-            </button>
-            <button type="button" class="tab-btn" data-s5-view="frequent" id="btn-s5-frequent" role="tab" aria-selected="false">
-              Directional Chains (A→B→C)
-            </button>
-            <button type="button" class="tab-btn" data-s5-view="longest" id="btn-s5-longest" role="tab" aria-selected="false">
-              Record Long Runs (5+)
-            </button>
-          </div>
-        </div>
-
-        <!-- Filter Toolbar -->
-        <div class="s5-toolbar" id="s5-toolbar">
-          <div class="s5-filter-group" role="group" aria-label="Sequence Length Filter">
-            <span class="filter-prefix">Length:</span>
-            <button type="button" class="filter-link-btn active" data-s5-length="all" id="s5-len-all">All (3+)</button>
-            <button type="button" class="filter-link-btn" data-s5-length="3" id="s5-len-3">Trios (3)</button>
-            <button type="button" class="filter-link-btn" data-s5-length="4" id="s5-len-4">Quartets (4)</button>
-            <button type="button" class="filter-link-btn" data-s5-length="5+" id="s5-len-5">Long Runs (5+)</button>
+        <div class="profile-card-block s6-main-block" id="s6-main-block">
+          <div class="block-header s6-block-header">
+            <div>
+              <span class="block-title">Mistake Leaderboard</span>
+              <span class="block-sub">Actual slips compared to expected slips for each person's turn positions</span>
+            </div>
+            <div class="s5-header-badge" id="s6-header-badge">
+              <span class="badge-pill" id="s6-badge-rate">— overall rate</span>
+              <span class="badge-pill" id="s6-badge-late">— in final third</span>
+            </div>
           </div>
 
-          <div class="s5-controls-right">
-            <div class="s5-member-filter">
-              <label for="s5-filter-member" class="s5-filter-label">Focus:</label>
-              <div class="custom-select-wrap">
-                <select id="s5-filter-member" class="s5-select-dropdown" aria-label="Filter sequences by teammate">
-                  <option value="all" selected>Entire Team (All)</option>
-                </select>
-              </div>
+          <div class="chart-nav-row s6-nav-row">
+            <div class="view-tabs" role="tablist" aria-label="Mistakes views">
+              <button type="button" class="tab-btn active" data-s6-view="leaderboard" id="btn-s6-leaderboard" role="tab"
+                aria-selected="true">Slip-Up Index</button>
+              <button type="button" class="tab-btn" data-s6-view="timing" id="btn-s6-timing" role="tab"
+                aria-selected="false">When It Happens</button>
+            </div>
+          </div>
+
+          <!-- TAB 1: Slip-Up Index (Full Team List) -->
+          <div id="s6-view-leaderboard" class="s6-view-panel">
+            <div class="s4-toolbar">
+              <span class="s4-ranking-order-label">All teammates &bull; Ordered by Actual vs. Expected (Δ)</span>
             </div>
 
-            <div class="s5-dedup-filter" id="s5-dedup-filter-wrap">
-              <label for="s5-filter-dedup" class="s5-filter-label">Scope:</label>
-              <div class="custom-select-wrap">
-                <select id="s5-filter-dedup" class="s5-select-dropdown" aria-label="Deduplication mode">
-                  <option value="maximal" selected>Maximal Only</option>
-                  <option value="all">Include Sub-groups</option>
-                </select>
+            <div class="chart-layout-row s4-layout-row">
+              <div class="s4-leaderboard-container">
+                <div class="s4-table-header">
+                  <span>#</span>
+                  <span>Teammate</span>
+                  <span>Turns</span>
+                  <span>Actual / Exp (Δ)</span>
+                  <span>Slip-Up Rate</span>
+                  <span>Avg Turn</span>
+                  <span>Last Slip-Up</span>
+                </div>
+                <div class="s4-rows-wrap" id="s6-rows-wrap"></div>
               </div>
+
+              <aside class="s5-inspector-sidebar" id="s6-inspector-sidebar" aria-label="Mistake inspector">
+                <div class="s5-inspector-header">
+                  <span class="s5-inspector-title">Slip-Up Profile</span>
+                  <span class="s5-inspector-tag">Click a teammate</span>
+                </div>
+                <div class="s5-inspector-body" id="s6-inspector-body"></div>
+              </aside>
             </div>
-
-            <span class="s5-results-count-label" id="s5-results-count-badge">Showing <strong id="s5-display-count">0</strong> groups</span>
-          </div>
-        </div>
-
-        <!-- TAB 1: Speaking Groups / Clusters (Order Independent: A-B-C, B-C-A, C-A-B & reverses) -->
-        <div id="s5-view-clusters" class="s5-view-panel">
-          <div class="chart-layout-row s5-layout-row">
-            <div class="s5-list-container">
-              <div class="s5-chains-grid" id="s5-clusters-grid">
-                <!-- Dynamically populated group clusters -->
-              </div>
-              <div class="s5-pagination-bar" id="s5-clusters-pagination-bar" style="display: none;">
-                <button type="button" class="s5-page-btn" id="s5-btn-clusters-prev">← Previous</button>
-                <span class="s5-page-info" id="s5-page-clusters-info">Page 1 of 1</span>
-                <button type="button" class="s5-page-btn" id="s5-btn-clusters-next">Next →</button>
-              </div>
-            </div>
-
-            <aside class="s5-inspector-sidebar" id="s5-clusters-inspector-sidebar" aria-label="Group cluster inspector sidebar">
-              <div class="s5-inspector-header">
-                <span class="s5-inspector-title">Speaking Group Inspector</span>
-                <span class="s5-inspector-tag">All Co-Occurring Orders</span>
-              </div>
-              <div class="s5-inspector-body" id="s5-clusters-inspector-body">
-                <!-- Populated dynamically on click -->
-              </div>
-            </aside>
-          </div>
-        </div>
-
-        <!-- TAB 2: Reversible Corridors (A⇄B⇄C) -->
-        <div id="s5-view-grouped" class="s5-view-panel" style="display: none;">
-          <div class="chart-layout-row s5-layout-row">
-            <div class="s5-list-container">
-              <div class="s5-chains-grid" id="s5-grouped-grid">
-                <!-- Dynamically populated reversible grouped cards -->
-              </div>
-              <div class="s5-pagination-bar" id="s5-grouped-pagination-bar" style="display: none;">
-                <button type="button" class="s5-page-btn" id="s5-btn-grouped-prev">← Previous</button>
-                <span class="s5-page-info" id="s5-page-grouped-info">Page 1 of 1</span>
-                <button type="button" class="s5-page-btn" id="s5-btn-grouped-next">Next →</button>
-              </div>
-            </div>
-
-            <aside class="s5-inspector-sidebar" id="s5-grouped-inspector-sidebar" aria-label="Corridor inspector sidebar">
-              <div class="s5-inspector-header">
-                <span class="s5-inspector-title">Corridor Inspector</span>
-                <span class="s5-inspector-tag">Reversible Corridor</span>
-              </div>
-              <div class="s5-inspector-body" id="s5-grouped-inspector-body">
-                <!-- Populated dynamically on click -->
-              </div>
-            </aside>
-          </div>
-        </div>
-
-        <!-- TAB 3: Directional Chains (A→B→C) -->
-        <div id="s5-view-frequent" class="s5-view-panel" style="display: none;">
-          <div class="chart-layout-row s5-layout-row">
-            <!-- Left: Chains List / Cards -->
-            <div class="s5-list-container">
-              <div class="s5-chains-grid" id="s5-chains-grid">
-                <!-- Dynamically populated cards -->
-              </div>
-              <div class="s5-pagination-bar" id="s5-pagination-bar" style="display: none;">
-                <button type="button" class="s5-page-btn" id="s5-btn-prev">← Previous</button>
-                <span class="s5-page-info" id="s5-page-info">Page 1 of 1</span>
-                <button type="button" class="s5-page-btn" id="s5-btn-next">Next →</button>
-              </div>
-            </div>
-
-            <!-- Right: Inspector Sidebar (Sticky) -->
-            <aside class="s5-inspector-sidebar" id="s5-inspector-sidebar" aria-label="Sequence inspector sidebar">
-              <div class="s5-inspector-header">
-                <span class="s5-inspector-title">Chain Inspector</span>
-                <span class="s5-inspector-tag" id="s5-inspector-mode-tag">Directional Flow</span>
-              </div>
-              <div class="s5-inspector-body" id="s5-inspector-body">
-                <!-- Populated dynamically on click -->
-              </div>
-            </aside>
-          </div>
-        </div>
-
-        <!-- TAB 3: Record Long Runs View -->
-        <div id="s5-view-longest" class="s5-view-panel" style="display: none;">
-          <div class="s5-longest-container" id="s5-longest-container">
-            <!-- Dynamically populated long runs -->
-          </div>
-        </div>
-
-        <!-- Footnote matching sections 1-4 editorial tone -->
-        <div class="block-footnote s5-footnote" style="margin-top: 14px;">
-          <strong>Sequence Mining & Grouping Methodology:</strong> We scan all 302 standup sessions in chronological order of nomination (<em>P₁ → P₂ → … → P<sub>N</sub></em>). A contiguous sequence of length <em>L ≥ 3</em> is recorded whenever it appears 2 or more times. 
-          <em>Speaking Groups (Clusters):</em> Unites all permutations of a contiguous cohort (e.g. <em>A → B → C</em>, <em>B → C → A</em>, <em>C → A → B</em>, and reverse sequences) to identify essential clusters of peers who reliably speak adjacent to each other.
-          <em>Reversible Corridors:</em> Pairs reciprocal pathways (<em>A ⇄ B ⇄ C</em>) that flow back and forth across sessions.
-          <em>Maximal Scope:</em> Filters out sub-slices subsumed entirely within larger repeated runs.
-        </div>
-      </div>
-    </section>
-
-    <!-- ========================================== -->
-    <!-- SECTION 6: Mistakes (picked someone who already went) -->
-    <!-- ========================================== -->
-    <section class="section-container" id="section-mistakes">
-      <div class="subsection-header section-divider-top">
-        <span class="subsection-tag">Section 6</span>
-        <h2 class="subsection-title">The Hall of Slip-Ups</h2>
-        <p class="subsection-desc">
-          Every time a speaker reached for a teammate who had already spoken, we logged a mistake. Raw counts are misleading: the later your turn, the more people have already gone, so the easier it is to slip. Each teammate is therefore benchmarked against an exposure-adjusted expectation.
-        </p>
-      </div>
-
-      <div class="stat-strip s6-stat-strip" id="s6-stat-strip" aria-label="Mistake key metrics">
-        <div class="stat-item">
-          <span class="stat-label">Total Slip-Ups</span>
-          <div class="stat-value" id="s6-kpi-total">—</div>
-          <span class="stat-subtext" id="s6-kpi-total-sub"></span>
-        </div>
-        <div class="stat-item">
-          <span class="stat-label">Most Slip-Ups</span>
-          <div class="stat-value highlight-red" id="s6-kpi-top">—</div>
-          <span class="stat-subtext" id="s6-kpi-top-sub"></span>
-        </div>
-        <div class="stat-item">
-          <span class="stat-label">Sessions Affected</span>
-          <div class="stat-value highlight-blue" id="s6-kpi-sessions">—</div>
-          <span class="stat-subtext" id="s6-kpi-sessions-sub"></span>
-        </div>
-        <div class="stat-item">
-          <span class="stat-label">Clean Sheet Club</span>
-          <div class="stat-value" id="s6-kpi-clean">—</div>
-          <span class="stat-subtext" id="s6-kpi-clean-sub"></span>
-        </div>
-      </div>
-
-      <div class="profile-card-block s6-main-block" id="s6-main-block">
-        <div class="block-header s6-block-header">
-          <div>
-            <span class="block-title">Mistakes: Picking Someone Who Already Went</span>
-            <span class="block-sub">Actual slips vs. an expectation weighted by how many teammates had already spoken</span>
-          </div>
-          <div class="s5-header-badge" id="s6-header-badge">
-            <span class="badge-pill" id="s6-badge-rate">— overall rate</span>
-            <span class="badge-pill" id="s6-badge-late">— in final third</span>
-          </div>
-        </div>
-
-        <div class="chart-nav-row s6-nav-row">
-          <div class="view-tabs" role="tablist" aria-label="Mistakes views">
-            <button type="button" class="tab-btn active" data-s6-view="leaderboard" id="btn-s6-leaderboard" role="tab" aria-selected="true">Slip-Up Index</button>
-            <button type="button" class="tab-btn" data-s6-view="timing" id="btn-s6-timing" role="tab" aria-selected="false">When It Happens</button>
-            <button type="button" class="tab-btn" data-s6-view="sessions" id="btn-s6-sessions" role="tab" aria-selected="false">Session Log</button>
-          </div>
-        </div>
-
-        <!-- TAB 1: Slip-Up Index -->
-        <div id="s6-view-leaderboard" class="s6-view-panel">
-          <div class="s4-toolbar">
-            <div class="s4-filter-group" role="group" aria-label="Mistake filter">
-              <span class="filter-prefix">Show:</span>
-              <button type="button" class="filter-link-btn active" data-s6-filter="all" id="s6-filter-all">Everyone</button>
-              <button type="button" class="filter-link-btn" data-s6-filter="offenders" id="s6-filter-offenders">Offenders Only</button>
-              <button type="button" class="filter-link-btn" data-s6-filter="clean" id="s6-filter-clean">Clean Sheets</button>
-            </div>
-            <span class="s4-ranking-order-label">Ordered by Actual vs. Expected (Δ)</span>
           </div>
 
-          <div class="chart-layout-row s4-layout-row">
-            <div class="s4-leaderboard-container">
-              <div class="s4-table-header">
-                <span>#</span>
-                <span>Teammate</span>
-                <span>Turns</span>
-                <span>Actual / Exp (Δ)</span>
-                <span>Slip Rate</span>
-                <span>Avg Turn</span>
-                <span>Last Slip</span>
-              </div>
-              <div class="s4-rows-wrap" id="s6-rows-wrap"></div>
-            </div>
+          <!-- TAB 2: Timing & Trend -->
+          <div id="s6-view-timing" class="s6-view-panel" style="display: none;">
+            <div class="s6-timing-grid" id="s6-timing-grid"></div>
+          </div>
 
-            <aside class="s5-inspector-sidebar" id="s6-inspector-sidebar" aria-label="Mistake inspector">
-              <div class="s5-inspector-header">
-                <span class="s5-inspector-title">Slip-Up Profile</span>
-                <span class="s5-inspector-tag">Click a teammate</span>
-              </div>
-              <div class="s5-inspector-body" id="s6-inspector-body"></div>
-            </aside>
+          <div class="block-footnote s6-footnote" style="margin-top: 14px;">
+            <strong>How it works:</strong> A slip-up happens when someone nominates a teammate who already spoke.
+            Later turns carry higher risk. <strong>Difference (Δ)</strong> shows who slipped more (+) or less (−) than
+            expected based on their turn positions.
           </div>
         </div>
-
-        <!-- TAB 2: Timing & Trend -->
-        <div id="s6-view-timing" class="s6-view-panel" style="display: none;">
-          <div class="s6-timing-grid" id="s6-timing-grid"></div>
-        </div>
-
-        <!-- TAB 3: Session Log -->
-        <div id="s6-view-sessions" class="s6-view-panel" style="display: none;">
-          <div class="s6-session-list" id="s6-session-list"></div>
-        </div>
-
-        <div class="block-footnote s6-footnote" style="margin-top: 14px;">
-          <strong>Mistakes Methodology:</strong> A slip-up is any turn flagged in the <code>Mistakes</code> column — the speaker tried to hand off to someone who had already spoken.
-          <em>Exposure:</em> for a turn at position <em>p</em> in a session of <em>N</em> speakers, exposure = (<em>p</em> − 1) / (<em>N</em> − 1), the share of teammates already gone.
-          <em>Expected:</em> a person's total exposure × the team-wide slips per unit of exposure. Δ = actual − expected, so a positive Δ means more slips than the position of their turns alone would explain.
-        </div>
-      </div>
-    </section>
-
-    <!-- FT Editorial Footer -->
-    <footer class="ft-footer">
-      <span>Source: <code>standup_data.csv</code> (<span id="footer-count">303</span> sessions processed)</span>
-      <span>Graphic: Stand-Up Wrapped &nbsp;|&nbsp; Palette: FT Eggshell • Yale Blue • Strawberry Red</span>
-    </footer>
+      </section>
   </div>
 
   <!-- Maritime Papercraft Wave Automaton Overlay -->
@@ -914,45 +726,75 @@
         <!-- Layer 5 (Backdrop wave) -->
         <div class="maritime-paper-wave wave-layer-5">
           <svg class="paper-wave-svg" viewBox="0 0 2400 220" preserveAspectRatio="none">
-            <path class="wave-body-fill" d="M 0,45 C 60,15 100,15 140,15 C 220,75 280,75 340,75 C 372,45 380,45 400,45 C 460,15 500,15 540,15 C 620,75 680,75 740,75 C 772,45 780,45 800,45 C 860,15 900,15 940,15 C 1020,75 1080,75 1140,75 C 1172,45 1180,45 1200,45 C 1260,15 1300,15 1340,15 C 1420,75 1480,75 1540,75 C 1572,45 1580,45 1600,45 C 1660,15 1700,15 1740,15 C 1820,75 1880,75 1940,75 C 1972,45 1980,45 2000,45 C 2060,15 2100,15 2140,15 C 2220,75 2280,75 2340,75 C 2372,45 2380,45 2400,45 L 2400,220 L 0,220 Z"></path>
-            <path class="wave-mid-stripe" d="M 0,45 C 60,15 100,15 140,15 C 220,75 280,75 340,75 C 372,45 380,45 400,45 C 460,15 500,15 540,15 C 620,75 680,75 740,75 C 772,45 780,45 800,45 C 860,15 900,15 940,15 C 1020,75 1080,75 1140,75 C 1172,45 1180,45 1200,45 C 1260,15 1300,15 1340,15 C 1420,75 1480,75 1540,75 C 1572,45 1580,45 1600,45 C 1660,15 1700,15 1740,15 C 1820,75 1880,75 1940,75 C 1972,45 1980,45 2000,45 C 2060,15 2100,15 2140,15 C 2220,75 2280,75 2340,75 C 2372,45 2380,45 2400,45" fill="none" stroke-width="12"></path>
-            <path class="wave-foam-lip" d="M 0,45 C 60,15 100,15 140,15 C 220,75 280,75 340,75 C 372,45 380,45 400,45 C 460,15 500,15 540,15 C 620,75 680,75 740,75 C 772,45 780,45 800,45 C 860,15 900,15 940,15 C 1020,75 1080,75 1140,75 C 1172,45 1180,45 1200,45 C 1260,15 1300,15 1340,15 C 1420,75 1480,75 1540,75 C 1572,45 1580,45 1600,45 C 1660,15 1700,15 1740,15 C 1820,75 1880,75 1940,75 C 1972,45 1980,45 2000,45 C 2060,15 2100,15 2140,15 C 2220,75 2280,75 2340,75 C 2372,45 2380,45 2400,45" fill="none" stroke-width="6"></path>
+            <path class="wave-body-fill"
+              d="M 0,45 C 60,15 100,15 140,15 C 220,75 280,75 340,75 C 372,45 380,45 400,45 C 460,15 500,15 540,15 C 620,75 680,75 740,75 C 772,45 780,45 800,45 C 860,15 900,15 940,15 C 1020,75 1080,75 1140,75 C 1172,45 1180,45 1200,45 C 1260,15 1300,15 1340,15 C 1420,75 1480,75 1540,75 C 1572,45 1580,45 1600,45 C 1660,15 1700,15 1740,15 C 1820,75 1880,75 1940,75 C 1972,45 1980,45 2000,45 C 2060,15 2100,15 2140,15 C 2220,75 2280,75 2340,75 C 2372,45 2380,45 2400,45 L 2400,220 L 0,220 Z">
+            </path>
+            <path class="wave-mid-stripe"
+              d="M 0,45 C 60,15 100,15 140,15 C 220,75 280,75 340,75 C 372,45 380,45 400,45 C 460,15 500,15 540,15 C 620,75 680,75 740,75 C 772,45 780,45 800,45 C 860,15 900,15 940,15 C 1020,75 1080,75 1140,75 C 1172,45 1180,45 1200,45 C 1260,15 1300,15 1340,15 C 1420,75 1480,75 1540,75 C 1572,45 1580,45 1600,45 C 1660,15 1700,15 1740,15 C 1820,75 1880,75 1940,75 C 1972,45 1980,45 2000,45 C 2060,15 2100,15 2140,15 C 2220,75 2280,75 2340,75 C 2372,45 2380,45 2400,45"
+              fill="none" stroke-width="12"></path>
+            <path class="wave-foam-lip"
+              d="M 0,45 C 60,15 100,15 140,15 C 220,75 280,75 340,75 C 372,45 380,45 400,45 C 460,15 500,15 540,15 C 620,75 680,75 740,75 C 772,45 780,45 800,45 C 860,15 900,15 940,15 C 1020,75 1080,75 1140,75 C 1172,45 1180,45 1200,45 C 1260,15 1300,15 1340,15 C 1420,75 1480,75 1540,75 C 1572,45 1580,45 1600,45 C 1660,15 1700,15 1740,15 C 1820,75 1880,75 1940,75 C 1972,45 1980,45 2000,45 C 2060,15 2100,15 2140,15 C 2220,75 2280,75 2340,75 C 2372,45 2380,45 2400,45"
+              fill="none" stroke-width="6"></path>
           </svg>
         </div>
 
         <!-- Layer 4 -->
         <div class="maritime-paper-wave wave-layer-4">
           <svg class="paper-wave-svg" viewBox="0 0 2400 220" preserveAspectRatio="none">
-            <path class="wave-body-fill" d="M 0,58 C 45,32 75,32 105,32 C 165,85 210,85 255,85 C 279,58 285,58 300,58 C 345,32 375,32 405,32 C 465,85 510,85 555,85 C 579,58 585,58 600,58 C 645,32 675,32 705,32 C 765,85 810,85 855,85 C 879,58 885,58 900,58 C 945,32 975,32 1005,32 C 1065,85 1110,85 1155,85 C 1179,58 1185,58 1200,58 C 1245,32 1275,32 1305,32 C 1365,85 1410,85 1455,85 C 1479,58 1485,58 1500,58 C 1545,32 1575,32 1605,32 C 1665,85 1710,85 1755,85 C 1779,58 1785,58 1800,58 C 1845,32 1875,32 1905,32 C 1965,85 2010,85 2055,85 C 2079,58 2085,58 2100,58 C 2145,32 2175,32 2205,32 C 2265,85 2310,85 2355,85 C 2379,58 2385,58 2400,58 L 2400,220 L 0,220 Z"></path>
-            <path class="wave-mid-stripe" d="M 0,58 C 45,32 75,32 105,32 C 165,85 210,85 255,85 C 279,58 285,58 300,58 C 345,32 375,32 405,32 C 465,85 510,85 555,85 C 579,58 585,58 600,58 C 645,32 675,32 705,32 C 765,85 810,85 855,85 C 879,58 885,58 900,58 C 945,32 975,32 1005,32 C 1065,85 1110,85 1155,85 C 1179,58 1185,58 1200,58 C 1245,32 1275,32 1305,32 C 1365,85 1410,85 1455,85 C 1479,58 1485,58 1500,58 C 1545,32 1575,32 1605,32 C 1665,85 1710,85 1755,85 C 1779,58 1785,58 1800,58 C 1845,32 1875,32 1905,32 C 1965,85 2010,85 2055,85 C 2079,58 2085,58 2100,58 C 2145,32 2175,32 2205,32 C 2265,85 2310,85 2355,85 C 2379,58 2385,58 2400,58" fill="none" stroke-width="12"></path>
-            <path class="wave-foam-lip" d="M 0,58 C 45,32 75,32 105,32 C 165,85 210,85 255,85 C 279,58 285,58 300,58 C 345,32 375,32 405,32 C 465,85 510,85 555,85 C 579,58 585,58 600,58 C 645,32 675,32 705,32 C 765,85 810,85 855,85 C 879,58 885,58 900,58 C 945,32 975,32 1005,32 C 1065,85 1110,85 1155,85 C 1179,58 1185,58 1200,58 C 1245,32 1275,32 1305,32 C 1365,85 1410,85 1455,85 C 1479,58 1485,58 1500,58 C 1545,32 1575,32 1605,32 C 1665,85 1710,85 1755,85 C 1779,58 1785,58 1800,58 C 1845,32 1875,32 1905,32 C 1965,85 2010,85 2055,85 C 2079,58 2085,58 2100,58 C 2145,32 2175,32 2205,32 C 2265,85 2310,85 2355,85 C 2379,58 2385,58 2400,58" fill="none" stroke-width="6"></path>
+            <path class="wave-body-fill"
+              d="M 0,58 C 45,32 75,32 105,32 C 165,85 210,85 255,85 C 279,58 285,58 300,58 C 345,32 375,32 405,32 C 465,85 510,85 555,85 C 579,58 585,58 600,58 C 645,32 675,32 705,32 C 765,85 810,85 855,85 C 879,58 885,58 900,58 C 945,32 975,32 1005,32 C 1065,85 1110,85 1155,85 C 1179,58 1185,58 1200,58 C 1245,32 1275,32 1305,32 C 1365,85 1410,85 1455,85 C 1479,58 1485,58 1500,58 C 1545,32 1575,32 1605,32 C 1665,85 1710,85 1755,85 C 1779,58 1785,58 1800,58 C 1845,32 1875,32 1905,32 C 1965,85 2010,85 2055,85 C 2079,58 2085,58 2100,58 C 2145,32 2175,32 2205,32 C 2265,85 2310,85 2355,85 C 2379,58 2385,58 2400,58 L 2400,220 L 0,220 Z">
+            </path>
+            <path class="wave-mid-stripe"
+              d="M 0,58 C 45,32 75,32 105,32 C 165,85 210,85 255,85 C 279,58 285,58 300,58 C 345,32 375,32 405,32 C 465,85 510,85 555,85 C 579,58 585,58 600,58 C 645,32 675,32 705,32 C 765,85 810,85 855,85 C 879,58 885,58 900,58 C 945,32 975,32 1005,32 C 1065,85 1110,85 1155,85 C 1179,58 1185,58 1200,58 C 1245,32 1275,32 1305,32 C 1365,85 1410,85 1455,85 C 1479,58 1485,58 1500,58 C 1545,32 1575,32 1605,32 C 1665,85 1710,85 1755,85 C 1779,58 1785,58 1800,58 C 1845,32 1875,32 1905,32 C 1965,85 2010,85 2055,85 C 2079,58 2085,58 2100,58 C 2145,32 2175,32 2205,32 C 2265,85 2310,85 2355,85 C 2379,58 2385,58 2400,58"
+              fill="none" stroke-width="12"></path>
+            <path class="wave-foam-lip"
+              d="M 0,58 C 45,32 75,32 105,32 C 165,85 210,85 255,85 C 279,58 285,58 300,58 C 345,32 375,32 405,32 C 465,85 510,85 555,85 C 579,58 585,58 600,58 C 645,32 675,32 705,32 C 765,85 810,85 855,85 C 879,58 885,58 900,58 C 945,32 975,32 1005,32 C 1065,85 1110,85 1155,85 C 1179,58 1185,58 1200,58 C 1245,32 1275,32 1305,32 C 1365,85 1410,85 1455,85 C 1479,58 1485,58 1500,58 C 1545,32 1575,32 1605,32 C 1665,85 1710,85 1755,85 C 1779,58 1785,58 1800,58 C 1845,32 1875,32 1905,32 C 1965,85 2010,85 2055,85 C 2079,58 2085,58 2100,58 C 2145,32 2175,32 2205,32 C 2265,85 2310,85 2355,85 C 2379,58 2385,58 2400,58"
+              fill="none" stroke-width="6"></path>
           </svg>
         </div>
 
         <!-- Layer 3 (Tall central foam wave) -->
         <div class="maritime-paper-wave wave-layer-3">
           <svg class="paper-wave-svg" viewBox="0 0 2400 220" preserveAspectRatio="none">
-            <path class="wave-body-fill" d="M 0,57 C 40,20 66,20 93,20 C 146,95 186,95 226,95 C 247,57 253,57 266,57 C 306,20 332,20 359,20 C 412,95 452,95 492,95 C 513,57 519,57 532,57 C 572,20 598,20 625,20 C 678,95 718,95 758,95 C 779,57 785,57 798,57 C 838,20 864,20 891,20 C 944,95 984,95 1024,95 C 1045,57 1051,57 1064,57 C 1104,20 1130,20 1157,20 C 1210,95 1250,95 1290,95 C 1311,57 1317,57 1330,57 C 1370,20 1396,20 1423,20 C 1476,95 1516,95 1556,95 C 1577,57 1583,57 1596,57 C 1636,20 1662,20 1689,20 C 1742,95 1782,95 1822,95 C 1843,57 1849,57 1862,57 C 1902,20 1928,20 1955,20 C 2008,95 2048,95 2088,95 C 2109,57 2115,57 2128,57 C 2168,20 2194,20 2221,20 C 2274,95 2314,95 2354,95 C 2375,57 2381,57 2394,57 L 2400,220 L 0,220 Z"></path>
-            <path class="wave-mid-stripe" d="M 0,57 C 40,20 66,20 93,20 C 146,95 186,95 226,95 C 247,57 253,57 266,57 C 306,20 332,20 359,20 C 412,95 452,95 492,95 C 513,57 519,57 532,57 C 572,20 598,20 625,20 C 678,95 718,95 758,95 C 779,57 785,57 798,57 C 838,20 864,20 891,20 C 944,95 984,95 1024,95 C 1045,57 1051,57 1064,57 C 1104,20 1130,20 1157,20 C 1210,95 1250,95 1290,95 C 1311,57 1317,57 1330,57 C 1370,20 1396,20 1423,20 C 1476,95 1516,95 1556,95 C 1577,57 1583,57 1596,57 C 1636,20 1662,20 1689,20 C 1742,95 1782,95 1822,95 C 1843,57 1849,57 1862,57 C 1902,20 1928,20 1955,20 C 2008,95 2048,95 2088,95 C 2109,57 2115,57 2128,57 C 2168,20 2194,20 2221,20 C 2274,95 2314,95 2354,95 C 2375,57 2381,57 2394,57" fill="none" stroke-width="12"></path>
-            <path class="wave-foam-lip" d="M 0,57 C 40,20 66,20 93,20 C 146,95 186,95 226,95 C 247,57 253,57 266,57 C 306,20 332,20 359,20 C 412,95 452,95 492,95 C 513,57 519,57 532,57 C 572,20 598,20 625,20 C 678,95 718,95 758,95 C 779,57 785,57 798,57 C 838,20 864,20 891,20 C 944,95 984,95 1024,95 C 1045,57 1051,57 1064,57 C 1104,20 1130,20 1157,20 C 1210,95 1250,95 1290,95 C 1311,57 1317,57 1330,57 C 1370,20 1396,20 1423,20 C 1476,95 1516,95 1556,95 C 1577,57 1583,57 1596,57 C 1636,20 1662,20 1689,20 C 1742,95 1782,95 1822,95 C 1843,57 1849,57 1862,57 C 1902,20 1928,20 1955,20 C 2008,95 2048,95 2088,95 C 2109,57 2115,57 2128,57 C 2168,20 2194,20 2221,20 C 2274,95 2314,95 2354,95 C 2375,57 2381,57 2394,57" fill="none" stroke-width="6"></path>
+            <path class="wave-body-fill"
+              d="M 0,57 C 40,20 66,20 93,20 C 146,95 186,95 226,95 C 247,57 253,57 266,57 C 306,20 332,20 359,20 C 412,95 452,95 492,95 C 513,57 519,57 532,57 C 572,20 598,20 625,20 C 678,95 718,95 758,95 C 779,57 785,57 798,57 C 838,20 864,20 891,20 C 944,95 984,95 1024,95 C 1045,57 1051,57 1064,57 C 1104,20 1130,20 1157,20 C 1210,95 1250,95 1290,95 C 1311,57 1317,57 1330,57 C 1370,20 1396,20 1423,20 C 1476,95 1516,95 1556,95 C 1577,57 1583,57 1596,57 C 1636,20 1662,20 1689,20 C 1742,95 1782,95 1822,95 C 1843,57 1849,57 1862,57 C 1902,20 1928,20 1955,20 C 2008,95 2048,95 2088,95 C 2109,57 2115,57 2128,57 C 2168,20 2194,20 2221,20 C 2274,95 2314,95 2354,95 C 2375,57 2381,57 2394,57 L 2400,220 L 0,220 Z">
+            </path>
+            <path class="wave-mid-stripe"
+              d="M 0,57 C 40,20 66,20 93,20 C 146,95 186,95 226,95 C 247,57 253,57 266,57 C 306,20 332,20 359,20 C 412,95 452,95 492,95 C 513,57 519,57 532,57 C 572,20 598,20 625,20 C 678,95 718,95 758,95 C 779,57 785,57 798,57 C 838,20 864,20 891,20 C 944,95 984,95 1024,95 C 1045,57 1051,57 1064,57 C 1104,20 1130,20 1157,20 C 1210,95 1250,95 1290,95 C 1311,57 1317,57 1330,57 C 1370,20 1396,20 1423,20 C 1476,95 1516,95 1556,95 C 1577,57 1583,57 1596,57 C 1636,20 1662,20 1689,20 C 1742,95 1782,95 1822,95 C 1843,57 1849,57 1862,57 C 1902,20 1928,20 1955,20 C 2008,95 2048,95 2088,95 C 2109,57 2115,57 2128,57 C 2168,20 2194,20 2221,20 C 2274,95 2314,95 2354,95 C 2375,57 2381,57 2394,57"
+              fill="none" stroke-width="12"></path>
+            <path class="wave-foam-lip"
+              d="M 0,57 C 40,20 66,20 93,20 C 146,95 186,95 226,95 C 247,57 253,57 266,57 C 306,20 332,20 359,20 C 412,95 452,95 492,95 C 513,57 519,57 532,57 C 572,20 598,20 625,20 C 678,95 718,95 758,95 C 779,57 785,57 798,57 C 838,20 864,20 891,20 C 944,95 984,95 1024,95 C 1045,57 1051,57 1064,57 C 1104,20 1130,20 1157,20 C 1210,95 1250,95 1290,95 C 1311,57 1317,57 1330,57 C 1370,20 1396,20 1423,20 C 1476,95 1516,95 1556,95 C 1577,57 1583,57 1596,57 C 1636,20 1662,20 1689,20 C 1742,95 1782,95 1822,95 C 1843,57 1849,57 1862,57 C 1902,20 1928,20 1955,20 C 2008,95 2048,95 2088,95 C 2109,57 2115,57 2128,57 C 2168,20 2194,20 2221,20 C 2274,95 2314,95 2354,95 C 2375,57 2381,57 2394,57"
+              fill="none" stroke-width="6"></path>
           </svg>
         </div>
 
         <!-- Layer 2 -->
         <div class="maritime-paper-wave wave-layer-2">
           <svg class="paper-wave-svg" viewBox="0 0 2400 220" preserveAspectRatio="none">
-            <path class="wave-body-fill" d="M 0,57 C 51,30 85,30 120,30 C 188,85 239,85 291,85 C 318,57 325,57 342,57 C 393,30 428,30 462,30 C 530,85 581,85 633,85 C 660,57 667,57 684,57 C 735,30 770,30 804,30 C 872,85 923,85 975,85 C 1002,57 1009,57 1026,57 C 1077,30 1112,30 1146,30 C 1214,85 1265,85 1317,85 C 1344,57 1351,57 1368,57 C 1419,30 1454,30 1488,30 C 1556,85 1607,85 1659,85 C 1686,57 1693,57 1710,57 C 1761,30 1796,30 1830,30 C 1898,85 1949,85 2001,85 C 2028,57 2035,57 2052,57 C 2103,30 2138,30 2172,30 C 2240,85 2291,85 2343,85 C 2370,57 2377,57 2394,57 L 2400,220 L 0,220 Z"></path>
-            <path class="wave-mid-stripe" d="M 0,57 C 51,30 85,30 120,30 C 188,85 239,85 291,85 C 318,57 325,57 342,57 C 393,30 428,30 462,30 C 530,85 581,85 633,85 C 660,57 667,57 684,57 C 735,30 770,30 804,30 C 872,85 923,85 975,85 C 1002,57 1009,57 1026,57 C 1077,30 1112,30 1146,30 C 1214,85 1265,85 1317,85 C 1344,57 1351,57 1368,57 C 1419,30 1454,30 1488,30 C 1556,85 1607,85 1659,85 C 1686,57 1693,57 1710,57 C 1761,30 1796,30 1830,30 C 1898,85 1949,85 2001,85 C 2028,57 2035,57 2052,57 C 2103,30 2138,30 2172,30 C 2240,85 2291,85 2343,85 C 2370,57 2377,57 2394,57" fill="none" stroke-width="12"></path>
-            <path class="wave-foam-lip" d="M 0,57 C 51,30 85,30 120,30 C 188,85 239,85 291,85 C 318,57 325,57 342,57 C 393,30 428,30 462,30 C 530,85 581,85 633,85 C 660,57 667,57 684,57 C 735,30 770,30 804,30 C 872,85 923,85 975,85 C 1002,57 1009,57 1026,57 C 1077,30 1112,30 1146,30 C 1214,85 1265,85 1317,85 C 1344,57 1351,57 1368,57 C 1419,30 1454,30 1488,30 C 1556,85 1607,85 1659,85 C 1686,57 1693,57 1710,57 C 1761,30 1796,30 1830,30 C 1898,85 1949,85 2001,85 C 2028,57 2035,57 2052,57 C 2103,30 2138,30 2172,30 C 2240,85 2291,85 2343,85 C 2370,57 2377,57 2394,57" fill="none" stroke-width="6"></path>
+            <path class="wave-body-fill"
+              d="M 0,57 C 51,30 85,30 120,30 C 188,85 239,85 291,85 C 318,57 325,57 342,57 C 393,30 428,30 462,30 C 530,85 581,85 633,85 C 660,57 667,57 684,57 C 735,30 770,30 804,30 C 872,85 923,85 975,85 C 1002,57 1009,57 1026,57 C 1077,30 1112,30 1146,30 C 1214,85 1265,85 1317,85 C 1344,57 1351,57 1368,57 C 1419,30 1454,30 1488,30 C 1556,85 1607,85 1659,85 C 1686,57 1693,57 1710,57 C 1761,30 1796,30 1830,30 C 1898,85 1949,85 2001,85 C 2028,57 2035,57 2052,57 C 2103,30 2138,30 2172,30 C 2240,85 2291,85 2343,85 C 2370,57 2377,57 2394,57 L 2400,220 L 0,220 Z">
+            </path>
+            <path class="wave-mid-stripe"
+              d="M 0,57 C 51,30 85,30 120,30 C 188,85 239,85 291,85 C 318,57 325,57 342,57 C 393,30 428,30 462,30 C 530,85 581,85 633,85 C 660,57 667,57 684,57 C 735,30 770,30 804,30 C 872,85 923,85 975,85 C 1002,57 1009,57 1026,57 C 1077,30 1112,30 1146,30 C 1214,85 1265,85 1317,85 C 1344,57 1351,57 1368,57 C 1419,30 1454,30 1488,30 C 1556,85 1607,85 1659,85 C 1686,57 1693,57 1710,57 C 1761,30 1796,30 1830,30 C 1898,85 1949,85 2001,85 C 2028,57 2035,57 2052,57 C 2103,30 2138,30 2172,30 C 2240,85 2291,85 2343,85 C 2370,57 2377,57 2394,57"
+              fill="none" stroke-width="12"></path>
+            <path class="wave-foam-lip"
+              d="M 0,57 C 51,30 85,30 120,30 C 188,85 239,85 291,85 C 318,57 325,57 342,57 C 393,30 428,30 462,30 C 530,85 581,85 633,85 C 660,57 667,57 684,57 C 735,30 770,30 804,30 C 872,85 923,85 975,85 C 1002,57 1009,57 1026,57 C 1077,30 1112,30 1146,30 C 1214,85 1265,85 1317,85 C 1344,57 1351,57 1368,57 C 1419,30 1454,30 1488,30 C 1556,85 1607,85 1659,85 C 1686,57 1693,57 1710,57 C 1761,30 1796,30 1830,30 C 1898,85 1949,85 2001,85 C 2028,57 2035,57 2052,57 C 2103,30 2138,30 2172,30 C 2240,85 2291,85 2343,85 C 2370,57 2377,57 2394,57"
+              fill="none" stroke-width="6"></path>
           </svg>
         </div>
 
         <!-- Layer 1 (Foreground, closest wave) -->
         <div class="maritime-paper-wave wave-layer-1">
           <svg class="paper-wave-svg" viewBox="0 0 2400 220" preserveAspectRatio="none">
-            <path class="wave-body-fill" d="M 0,67 C 45,40 75,40 105,40 C 165,95 210,95 255,95 C 279,67 285,67 300,67 C 345,40 375,40 405,40 C 465,95 510,95 555,95 C 579,67 585,67 600,67 C 645,40 675,40 705,40 C 765,95 810,95 855,95 C 879,67 885,67 900,67 C 945,40 975,40 1005,40 C 1065,95 1110,95 1155,95 C 1179,67 1185,67 1200,67 C 1245,40 1275,40 1305,40 C 1365,95 1410,95 1455,95 C 1479,67 1485,67 1500,67 C 1545,40 1575,40 1605,40 C 1665,95 1710,95 1755,95 C 1779,67 1785,67 1800,67 C 1845,40 1875,40 1905,40 C 1965,95 2010,95 2055,95 C 2079,67 2085,67 2100,67 C 2145,40 2175,40 2205,40 C 2265,95 2310,95 2355,95 C 2379,67 2385,67 2400,67 L 2400,220 L 0,220 Z"></path>
-            <path class="wave-mid-stripe" d="M 0,67 C 45,40 75,40 105,40 C 165,95 210,95 255,95 C 279,67 285,67 300,67 C 345,40 375,40 405,40 C 465,95 510,95 555,95 C 579,67 585,67 600,67 C 645,40 675,40 705,40 C 765,95 810,95 855,95 C 879,67 885,67 900,67 C 945,40 975,40 1005,40 C 1065,95 1110,95 1155,95 C 1179,67 1185,67 1200,67 C 1245,40 1275,40 1305,40 C 1365,95 1410,95 1455,95 C 1479,67 1485,67 1500,67 C 1545,40 1575,40 1605,40 C 1665,95 1710,95 1755,95 C 1779,67 1785,67 1800,67 C 1845,40 1875,40 1905,40 C 1965,95 2010,95 2055,95 C 2079,67 2085,67 2100,67 C 2145,40 2175,40 2205,40 C 2265,95 2310,95 2355,95 C 2379,67 2385,67 2400,67" fill="none" stroke-width="12"></path>
-            <path class="wave-foam-lip" d="M 0,67 C 45,40 75,40 105,40 C 165,95 210,95 255,95 C 279,67 285,67 300,67 C 345,40 375,40 405,40 C 465,95 510,95 555,95 C 579,67 585,67 600,67 C 645,40 675,40 705,40 C 765,95 810,95 855,95 C 879,67 885,67 900,67 C 945,40 975,40 1005,40 C 1065,95 1110,95 1155,95 C 1179,67 1185,67 1200,67 C 1245,40 1275,40 1305,40 C 1365,95 1410,95 1455,95 C 1479,67 1485,67 1500,67 C 1545,40 1575,40 1605,40 C 1665,95 1710,95 1755,95 C 1779,67 1785,67 1800,67 C 1845,40 1875,40 1905,40 C 1965,95 2010,95 2055,95 C 2079,67 2085,67 2100,67 C 2145,40 2175,40 2205,40 C 2265,95 2310,95 2355,95 C 2379,67 2385,67 2400,67" fill="none" stroke-width="6"></path>
+            <path class="wave-body-fill"
+              d="M 0,67 C 45,40 75,40 105,40 C 165,95 210,95 255,95 C 279,67 285,67 300,67 C 345,40 375,40 405,40 C 465,95 510,95 555,95 C 579,67 585,67 600,67 C 645,40 675,40 705,40 C 765,95 810,95 855,95 C 879,67 885,67 900,67 C 945,40 975,40 1005,40 C 1065,95 1110,95 1155,95 C 1179,67 1185,67 1200,67 C 1245,40 1275,40 1305,40 C 1365,95 1410,95 1455,95 C 1479,67 1485,67 1500,67 C 1545,40 1575,40 1605,40 C 1665,95 1710,95 1755,95 C 1779,67 1785,67 1800,67 C 1845,40 1875,40 1905,40 C 1965,95 2010,95 2055,95 C 2079,67 2085,67 2100,67 C 2145,40 2175,40 2205,40 C 2265,95 2310,95 2355,95 C 2379,67 2385,67 2400,67 L 2400,220 L 0,220 Z">
+            </path>
+            <path class="wave-mid-stripe"
+              d="M 0,67 C 45,40 75,40 105,40 C 165,95 210,95 255,95 C 279,67 285,67 300,67 C 345,40 375,40 405,40 C 465,95 510,95 555,95 C 579,67 585,67 600,67 C 645,40 675,40 705,40 C 765,95 810,95 855,95 C 879,67 885,67 900,67 C 945,40 975,40 1005,40 C 1065,95 1110,95 1155,95 C 1179,67 1185,67 1200,67 C 1245,40 1275,40 1305,40 C 1365,95 1410,95 1455,95 C 1479,67 1485,67 1500,67 C 1545,40 1575,40 1605,40 C 1665,95 1710,95 1755,95 C 1779,67 1785,67 1800,67 C 1845,40 1875,40 1905,40 C 1965,95 2010,95 2055,95 C 2079,67 2085,67 2100,67 C 2145,40 2175,40 2205,40 C 2265,95 2310,95 2355,95 C 2379,67 2385,67 2400,67"
+              fill="none" stroke-width="12"></path>
+            <path class="wave-foam-lip"
+              d="M 0,67 C 45,40 75,40 105,40 C 165,95 210,95 255,95 C 279,67 285,67 300,67 C 345,40 375,40 405,40 C 465,95 510,95 555,95 C 579,67 585,67 600,67 C 645,40 675,40 705,40 C 765,95 810,95 855,95 C 879,67 885,67 900,67 C 945,40 975,40 1005,40 C 1065,95 1110,95 1155,95 C 1179,67 1185,67 1200,67 C 1245,40 1275,40 1305,40 C 1365,95 1410,95 1455,95 C 1479,67 1485,67 1500,67 C 1545,40 1575,40 1605,40 C 1665,95 1710,95 1755,95 C 1779,67 1785,67 1800,67 C 1845,40 1875,40 1905,40 C 1965,95 2010,95 2055,95 C 2079,67 2085,67 2100,67 C 2145,40 2175,40 2205,40 C 2265,95 2310,95 2355,95 C 2379,67 2385,67 2400,67"
+              fill="none" stroke-width="6"></path>
           </svg>
         </div>
       </div>
@@ -963,7 +805,8 @@
   </div>
 
   <!-- Fallback local data + Main Logic -->
-  <script src="data/standup_metrics.js?v=51"></script>
-  <script src="app.js?v=51"></script>
+  <script src="data/standup_metrics.js?v=56"></script>
+  <script src="app.js?v=56"></script>
 </body>
+
 </html>

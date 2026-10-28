@@ -1409,13 +1409,13 @@ function renderPersonalProfile(memberName) {
 
     picksStatsEl.innerHTML = `
       <span class="picks-stat-badge">Total Picks: <strong>${nb.total_nominations}</strong></span>
-      <span class="picks-stat-badge crush-badge" title="Highest attendance-normalized picks: favored ${crushDiff} picks above random baseline">
+      <span class="picks-stat-badge crush-badge" title="Favored ${crushDiff} picks above expected chance">
         💘 Office Crush: <strong>${topCrush ? topCrush.name : 'None'} (${crushDiff} vs exp)</strong>
       </span>
-      <span class="picks-stat-badge enemy-badge" title="Most avoided relative to expected attendance: bypassed ${enemyDiff} picks below random baseline">
+      <span class="picks-stat-badge enemy-badge" title="Picked ${enemyDiff} fewer times than expected">
         ⚔️ Arch Enemy: <strong>${archEnemy ? archEnemy.name : 'None'} (${enemyDiff} vs exp)</strong>
       </span>
-      <span class="picks-stat-badge" title="Most frequent raw nomination">
+      <span class="picks-stat-badge" title="Most total picks">
         Top Volume: <strong>${topR ? topR.name : 'None'} (${topR ? topR.raw_count : 0}x)</strong>
       </span>
     `;
@@ -1653,7 +1653,7 @@ function renderSection3DuosList() {
             <div class="s3-balance-seg-left" style="width: ${p1Pct}%;"></div>
             <div class="s3-balance-seg-right" style="width: ${p2Pct}%;"></div>
           </div>
-          <div class="s3-balance-pill">${p.balance_pct}% Reciprocal Balance</div>
+          <div class="s3-balance-pill">${p.balance_pct}% Balance</div>
         </div>
       </li>
     `;
@@ -1697,7 +1697,7 @@ function updateSection3Inspection(hoveredNode, hoveredPair) {
       <span>
         <strong>${hoveredPair.m1} & ${hoveredPair.m2}</strong>: 
         <strong style="color: ${PALETTE.strawberryRed}; font-size: 0.90rem;">${hoveredPair.total_picks} mutual picks</strong> 
-        (Expected co-attendance baseline: <strong>${hoveredPair.total_expected}</strong> • Diff: <strong style="color: ${diffColor};">${diffStr}</strong>). 
+        (Expected: <strong>${hoveredPair.total_expected}</strong> • Diff: <strong style="color: ${diffColor};">${diffStr}</strong>). 
         Balance: <strong>${hoveredPair.balance_pct}%</strong> (${hoveredPair.m1}→${hoveredPair.m2}: ${hoveredPair.p12}, ${hoveredPair.m2}→${hoveredPair.m1}: ${hoveredPair.p21}) • 
         Category: <strong>${hoveredPair.emoji} ${hoveredPair.category}</strong>
       </span>
@@ -1712,9 +1712,9 @@ function updateSection3Inspection(hoveredNode, hoveredPair) {
     const topPartnerName = topPartner ? (topPartner.m1 === hoveredNode ? topPartner.m2 : topPartner.m1) : 'None';
     container.innerHTML = `
       <span>
-        <strong>${hoveredNode}'s Mutual Network</strong>: 
-        Top mutual bond is with <strong>${topPartnerName}</strong> (${topPartnerDiff} picks above expected, ${topPartner?.total_picks || 0} total mutual passes). 
-        Click node to isolate their reciprocal connections.
+        <strong>${hoveredNode}</strong>: 
+        Top partner is <strong>${topPartnerName}</strong> (${topPartnerDiff} vs expected, ${topPartner?.total_picks || 0} total two-way passes). 
+        Click to isolate their connections.
       </span>
     `;
     return;
@@ -1726,9 +1726,9 @@ function updateSection3Inspection(hoveredNode, hoveredPair) {
     const topPartnerName = topPartner ? (topPartner.m1 === s3FocusMember ? topPartner.m2 : topPartner.m1) : 'None';
     container.innerHTML = `
       <span>
-        <strong>Focused on ${s3FocusMember}</strong> • 
-        Showing all reciprocal pairings. Top mutual partner is <strong>${topPartnerName}</strong>. 
-        Click node or select 'Entire Team' to clear filter.
+        <strong>${s3FocusMember}</strong> • 
+        Showing all two-way pairs. Top partner is <strong>${topPartnerName}</strong>. 
+        Click or choose 'Entire Team' to reset.
       </span>
     `;
     return;
@@ -1736,9 +1736,9 @@ function updateSection3Inspection(hoveredNode, hoveredPair) {
 
   container.innerHTML = `
     <span>
-      <strong>Reciprocal Nomination Network</strong>: 
-      Links represent mutual nominations between teammates. Line thickness & warmth reflect picks exceeding the co-attendance expected baseline. 
-      Hover any member node or connection line to inspect their bidirectional metrics.
+      <strong>Two-Way Passing Web</strong>: 
+      Lines show two-way picks between teammates. Thicker lines mean more picks than expected by chance. 
+      Hover over any person or line to see their stats.
     </span>
   `;
 }
@@ -2397,7 +2397,7 @@ function renderSection4Comparison() {
     <div class="s4-camp-card will-camp">
       <div>
         <div class="s4-camp-title">Will's Top Enthusiasts</div>
-        <div class="s4-camp-sub">Highest intentionality & voluntary baton handoffs for Will</div>
+        <div class="s4-camp-sub">Picks Will most often when many options remain</div>
       </div>
       <ul class="s4-camp-list">
         ${willCamp.map(m => `
@@ -2419,7 +2419,7 @@ function renderSection4Comparison() {
     <div class="s4-camp-card faculty-camp">
       <div>
         <div class="s4-camp-title">Faculty Alliance</div>
-        <div class="s4-camp-sub">Mutual handoffs between the leadership pair</div>
+        <div class="s4-camp-sub">Handoffs between the two team leads</div>
       </div>
       <div style="padding: 12px 6px; display: flex; flex-direction: column; gap: 12px; text-align: center;">
         <div style="display: flex; justify-content: space-around; align-items: center;">
@@ -2440,7 +2440,7 @@ function renderSection4Comparison() {
         </div>
 
         <p style="font-size: 0.8rem; color: var(--text-muted); line-height: 1.4; margin: 0;">
-          Will and Luke have exchanged <strong>25 mutual picks</strong> across the season, maintaining a balanced <strong>96% reciprocity alignment</strong>.
+          Will and Luke exchanged <strong>25 picks</strong> with a very even <strong>96% two-way balance</strong>.
         </p>
       </div>
     </div>
@@ -2449,7 +2449,7 @@ function renderSection4Comparison() {
     <div class="s4-camp-card luke-camp">
       <div>
         <div class="s4-camp-title">Luke's Top Loyalists</div>
-        <div class="s4-camp-sub">Highest intentionality & voluntary baton handoffs for Luke</div>
+        <div class="s4-camp-sub">Picks Luke most often when many options remain</div>
       </div>
       <ul class="s4-camp-list">
         ${lukeCamp.map(m => `
@@ -2481,7 +2481,7 @@ function renderSection4Timing() {
     <div class="s4-timing-legend">
       <div class="s4-timing-legend-item">
         <span class="s4-legend-dot" style="background: var(--strawberry-red);"></span>
-        <span>Early Turns (Turns 1–3, High Voluntary Freedom)</span>
+        <span>Early Turns (Turns 1–3, High Choice)</span>
       </div>
       <div class="s4-timing-legend-item">
         <span class="s4-legend-dot" style="background: var(--pacific-blue);"></span>
@@ -2489,7 +2489,7 @@ function renderSection4Timing() {
       </div>
       <div class="s4-timing-legend-item">
         <span class="s4-legend-dot" style="background: var(--text-dim);"></span>
-        <span>Late Turns (Turns 8+, Low Freedom / Forced Pick)</span>
+        <span>Late Turns (Turns 8+, Few Options Left)</span>
       </div>
     </div>
 
@@ -2536,9 +2536,9 @@ function updateSection4Inspection(memberName) {
     <span>
       <strong>${m.name} (${m.badge})</strong>: 
       Called on Will or Luke <strong style="color:${diffColor}; font-size:0.92rem;">${m.raw_total} times</strong> 
-      (Expected baseline: <strong>${m.expected_total}</strong> • Diff: <strong style="color:${diffColor};">${diffStr}</strong>). 
-      Converted <strong>${m.conversion_rate}%</strong> of all ${m.opps_either} opportunities with an average speaking turn freedom of <strong>${m.avg_freedom_pct}%</strong>. 
-      Favorite leadership handoff: <strong>${m.favorite_teacher}</strong> (${m.raw_will} for Will, ${m.raw_luke} for Luke).
+      (Expected: <strong>${m.expected_total}</strong> • Diff: <strong style="color:${diffColor};">${diffStr}</strong>). 
+      Picked a lead in <strong>${m.conversion_rate}%</strong> of ${m.opps_either} chances, with <strong>${m.avg_freedom_pct}%</strong> average choice freedom. 
+      Prefers: <strong>${m.favorite_teacher}</strong> (${m.raw_will} for Will, ${m.raw_luke} for Luke).
     </span>
   `;
 }
@@ -2557,8 +2557,11 @@ const S5_PAGE_SIZE = 20;
 let s5SelectedChain = null;
 let s5SelectedGroupedChain = null;
 let s5SelectedCluster = null;
+const S5_INITIAL_LIMIT = 10;
+let s5ClusterLimit = S5_INITIAL_LIMIT;
 
 function initSection5() {
+  if (!document.getElementById('section-recurring-chains')) return;
   const rc = metricsData.recurring_chains;
   if (!rc) return;
 
@@ -2575,14 +2578,9 @@ function initSection5() {
   if (topClusterEl && rc.summary.top_cluster) {
     const tc = rc.summary.top_cluster;
     topClusterEl.innerHTML = `${tc.total_count} <span class="stat-unit">times</span>`;
-    topClusterSubEl.textContent = `${tc.members.join(' & ')} (${tc.distinct_orders_count} orders)`;
+    topClusterSubEl.textContent = tc.members.join(' & ');
   }
 
-  if (topGroupedEl && rc.summary.top_grouped_chain) {
-    const tg = rc.summary.top_grouped_chain;
-    topGroupedEl.innerHTML = `${tg.total_count} <span class="stat-unit">times</span>`;
-    topGroupedSubEl.textContent = `${tg.members.join(' ⇄ ')} (${tg.fwd_count} fwd • ${tg.rev_count} rev)`;
-  }
 
   if (topChainEl && rc.summary.top_trio) {
     topChainEl.innerHTML = `${rc.summary.top_trio.count} <span class="stat-unit">times</span>`;
@@ -2599,13 +2597,9 @@ function initSection5() {
     }
   }
 
-  // Header badges
+  // Header badge
   const bCluster = document.getElementById('s5-badge-cluster-count');
-  const bGrouped = document.getElementById('s5-badge-grouped-count');
-  const bDirectional = document.getElementById('s5-badge-directional-count');
-  if (bCluster) bCluster.textContent = `${(rc.summary.total_clusters || 2849).toLocaleString()} Clusters`;
-  if (bGrouped) bGrouped.textContent = `${(rc.summary.total_grouped_chains || 975).toLocaleString()} Reversible Corridors`;
-  if (bDirectional) bDirectional.textContent = `${(rc.summary.total_chains || 847).toLocaleString()} Directional Chains`;
+  if (bCluster) bCluster.textContent = `${(rc.summary.total_clusters || 2849).toLocaleString()} Groups`;
 
   // 2. Teammate Focus Dropdown
   const memberSelect = document.getElementById('s5-filter-member');
@@ -2616,38 +2610,22 @@ function initSection5() {
 
     memberSelect.addEventListener('change', () => {
       s5FilterMember = memberSelect.value;
-      s5CurrentPage = 1;
-      s5GroupedCurrentPage = 1;
-      s5ClustersCurrentPage = 1;
+      s5ClusterLimit = S5_INITIAL_LIMIT;
       renderActiveSection5View();
     });
   }
 
-  // 3. Length filter buttons
-  const lenBtns = document.querySelectorAll('.s5-toolbar [data-s5-length]');
-  lenBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      lenBtns.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      s5FilterLength = btn.dataset.s5Length;
-      s5CurrentPage = 1;
-      s5GroupedCurrentPage = 1;
-      s5ClustersCurrentPage = 1;
-      renderActiveSection5View();
-    });
-  });
-
-  // 4. Scope / Dedup select
-  const dedupSelect = document.getElementById('s5-filter-dedup');
-  if (dedupSelect) {
-    dedupSelect.addEventListener('change', () => {
-      s5FilterDedup = dedupSelect.value;
-      s5CurrentPage = 1;
-      s5GroupedCurrentPage = 1;
-      s5ClustersCurrentPage = 1;
-      renderActiveSection5View();
+  // 3. Show more button
+  const btnMore = document.getElementById('s5-btn-clusters-more');
+  if (btnMore) {
+    btnMore.addEventListener('click', () => {
+      s5ClusterLimit += 20;
+      renderSection5Clusters();
     });
   }
+
+  // Corridor / chain tabs and filters are hidden in the simplified view.
+  // Their render functions below are kept so they can be re-enabled later.
 
   // 5. Navigation Tab buttons
   const tabBtns = document.querySelectorAll('.s5-nav-row .tab-btn');
@@ -2744,8 +2722,9 @@ function initSection5() {
     });
   }
 
-  // Initial render default to clusters view
+  // Initial render: speaking groups + record run highlight
   renderSection5Clusters();
+  renderSection5Longest();
 }
 
 function renderActiveSection5View() {
@@ -2832,7 +2811,8 @@ function renderSection5Clusters() {
   if (!grid) return;
 
   const filtered = getFilteredSection5Clusters();
-  if (displayCountEl) displayCountEl.textContent = filtered.length;
+  const shownCount = Math.min(s5ClusterLimit, filtered.length);
+  if (displayCountEl) displayCountEl.textContent = shownCount;
 
   if (filtered.length === 0) {
     grid.innerHTML = `
@@ -2845,19 +2825,15 @@ function renderSection5Clusters() {
     return;
   }
 
-  const totalPages = Math.ceil(filtered.length / S5_PAGE_SIZE);
-  if (s5ClustersCurrentPage > totalPages) s5ClustersCurrentPage = totalPages;
-  if (s5ClustersCurrentPage < 1) s5ClustersCurrentPage = 1;
-
+  const remaining = filtered.length - shownCount;
   if (paginationBar) {
-    paginationBar.style.display = totalPages > 1 ? 'flex' : 'none';
-    if (pageInfoEl) pageInfoEl.textContent = `Page ${s5ClustersCurrentPage} of ${totalPages} (${filtered.length} total)`;
-    if (btnPrev) btnPrev.disabled = s5ClustersCurrentPage <= 1;
-    if (btnNext) btnNext.disabled = s5ClustersCurrentPage >= totalPages;
+    paginationBar.style.display = remaining > 0 ? 'flex' : 'none';
+    const moreBtn = document.getElementById('s5-btn-clusters-more');
+    if (moreBtn) moreBtn.textContent = `Show more (${remaining.toLocaleString()} left)`;
   }
 
-  const startIdx = (s5ClustersCurrentPage - 1) * S5_PAGE_SIZE;
-  const pageItems = filtered.slice(startIdx, startIdx + S5_PAGE_SIZE);
+  const startIdx = 0;
+  const pageItems = filtered.slice(0, shownCount);
 
   if (!s5SelectedCluster || !filtered.some(c => c.id === s5SelectedCluster.id)) {
     s5SelectedCluster = pageItems[0];
@@ -2866,7 +2842,7 @@ function renderSection5Clusters() {
   grid.innerHTML = pageItems.map((c, idx) => {
     const isSelected = s5SelectedCluster && s5SelectedCluster.id === c.id;
     const globalRank = startIdx + idx + 1;
-    const lenLabel = c.length === 3 ? 'Trio Group (3)' : (c.length === 4 ? 'Quartet Group (4)' : `${c.length}-Person Cohort`);
+    const lenLabel = c.length === 3 ? 'Trio (3)' : (c.length === 4 ? 'Quartet (4)' : `${c.length} People`);
 
     const memberPills = c.members.map((name) => {
       const isMatch = s5FilterMember !== 'all' && name === s5FilterMember;
@@ -3070,7 +3046,7 @@ function renderSection5GroupedChains() {
   grid.innerHTML = pageItems.map((c, idx) => {
     const isSelected = s5SelectedGroupedChain && s5SelectedGroupedChain.id === c.id;
     const globalRank = startIdx + idx + 1;
-    const lenLabel = c.length === 3 ? 'Trio (3)' : (c.length === 4 ? 'Quartet (4)' : `${c.length}-Corridor`);
+    const lenLabel = c.length === 3 ? 'Trio (3)' : (c.length === 4 ? 'Quartet (4)' : `${c.length}-Person Corridor`);
 
     const memberPills = c.members.map((name) => {
       const isMatch = s5FilterMember !== 'all' && name === s5FilterMember;
@@ -3087,7 +3063,7 @@ function renderSection5GroupedChains() {
         <div class="s5-chain-card-header">
           <div class="s5-chain-badge-group">
             <span class="s5-badge-length">#${globalRank} • ${lenLabel}</span>
-            ${c.is_bidirectional ? '<span class="s5-badge-bidirectional">Bidirectional ⇄</span>' : ''}
+            ${c.is_bidirectional ? '<span class="s5-badge-bidirectional">Two-Way ⇄</span>' : ''}
           </div>
           <div class="s5-chain-count-badge">
             ${c.total_count}<span>x</span>
@@ -3155,7 +3131,7 @@ function renderSection5Inspector(item, mode) {
 
         <div class="s5-insp-stat-grid">
           <div class="s5-insp-stat-item">
-            <span class="s5-insp-stat-label">Group Cohort</span>
+            <span class="s5-insp-stat-label">Group Size</span>
             <span class="s5-insp-stat-val">${item.length} Teammates</span>
           </div>
           <div class="s5-insp-stat-item">
@@ -3163,8 +3139,8 @@ function renderSection5Inspector(item, mode) {
             <span class="s5-insp-stat-val">Turn #${item.avg_start_pos}</span>
           </div>
           <div class="s5-insp-stat-item">
-            <span class="s5-insp-stat-label">Distinct Orders</span>
-            <span class="s5-insp-stat-val" style="color:var(--pacific-blue);">${item.distinct_orders_count} permutations</span>
+            <span class="s5-insp-stat-label">Different Orders</span>
+            <span class="s5-insp-stat-val" style="color:var(--pacific-blue);">${item.distinct_orders_count} orders</span>
           </div>
           <div class="s5-insp-stat-item">
             <span class="s5-insp-stat-label">Top Sequence</span>
@@ -3173,7 +3149,7 @@ function renderSection5Inspector(item, mode) {
         </div>
 
         <div style="font-family:var(--font-mono); font-size:0.70rem; font-weight:700; text-transform:uppercase; color:var(--text-dim); margin-top:2px;">
-          Observed Hand-off Orders (${item.permutations ? item.permutations.length : 0})
+          Observed Orders (${item.permutations ? item.permutations.length : 0})
         </div>
         <div class="s5-insp-dates-list" style="max-height: 160px;">
           ${(item.permutations || []).map(p => `
@@ -3185,7 +3161,7 @@ function renderSection5Inspector(item, mode) {
         </div>
 
         <div style="font-family:var(--font-mono); font-size:0.70rem; font-weight:700; text-transform:uppercase; color:var(--text-dim); margin-top:4px;">
-          All Session Occurrences (${item.occurrences.length})
+          All Standup Dates (${item.occurrences.length})
         </div>
         <div class="s5-insp-dates-list" style="max-height: 140px;">
           ${item.occurrences.map(o => `
@@ -3223,13 +3199,13 @@ function renderSection5Inspector(item, mode) {
             <span class="s5-insp-stat-val" style="color:var(--pacific-blue);">${item.initiator}</span>
           </div>
           <div class="s5-insp-stat-item">
-            <span class="s5-insp-stat-label">Final Anchor</span>
+            <span class="s5-insp-stat-label">Final Speaker</span>
             <span class="s5-insp-stat-val" style="color:var(--strawberry-red);">${item.finisher}</span>
           </div>
         </div>
 
         <div style="font-family:var(--font-mono); font-size:0.70rem; font-weight:700; text-transform:uppercase; color:var(--text-dim); margin-top:2px;">
-          Session Occurrences (${item.occurrences.length})
+          Standup Dates (${item.occurrences.length})
         </div>
         <div class="s5-insp-dates-list">
           ${item.occurrences.map(o => `
@@ -3257,7 +3233,7 @@ function renderSection5Inspector(item, mode) {
           <div class="s5-insp-stat-item">
             <span class="s5-insp-stat-label">Corridor Status</span>
             <span class="s5-insp-stat-val" style="color:${item.is_bidirectional?'var(--pacific-blue)':'var(--text-main)'};">
-              ${item.is_bidirectional ? 'Bidirectional ⇄' : 'One-way Only →'}
+              ${item.is_bidirectional ? 'Two-way ⇄' : 'One-way →'}
             </span>
           </div>
           <div class="s5-insp-stat-item">
@@ -3280,7 +3256,7 @@ function renderSection5Inspector(item, mode) {
         </div>
 
         <div style="font-family:var(--font-mono); font-size:0.70rem; font-weight:700; text-transform:uppercase; color:var(--text-dim); margin-top:2px;">
-          All Corridor Dates (${item.occurrences.length})
+          All Dates (${item.occurrences.length})
         </div>
         <div class="s5-insp-dates-list">
           ${item.occurrences.map(o => {
@@ -3331,7 +3307,7 @@ function renderSection5Longest() {
               <span class="s5-spotlight-badge">Unbroken Record</span>
             </div>
             <div class="s5-spotlight-desc">
-              On <strong>${date1}</strong> and again on <strong>${date2}</strong>, <strong>${recordRun.length} teammates</strong> handed off the baton in <em>the exact same sequence</em>. Across ${metricsData.summary?.total_standups || 302} team sessions, this is the longest matching contiguous speaking order in team history.
+              On <strong>${date1}</strong> and again on <strong>${date2}</strong>, <strong>${recordRun.length} teammates</strong> spoke in <em>the exact same order</em>. Across all standups, this is the longest matching sequence in team history.
             </div>
           </div>
           <div class="s5-chain-count-badge" style="font-size: 1.3rem;">
@@ -3350,7 +3326,7 @@ function renderSection5Longest() {
                 <div class="s5-session-turn-row">
                   <span class="s5-turn-num">#${(occ1?.start_pos || 1) + i}</span>
                   <span class="s5-turn-name">${name}</span>
-                  ${i < recordRun.members.length - 1 ? '<span style="color:var(--text-dim); margin-left:auto;">passed to →</span>' : '<span style="color:var(--strawberry-red); margin-left:auto; font-weight:700;">Final Finisher</span>'}
+                  ${i < recordRun.members.length - 1 ? '<span style="color:var(--text-dim); margin-left:auto;">passed to →</span>' : '<span style="color:var(--strawberry-red); margin-left:auto; font-weight:700;">Last Speaker</span>'}
                 </div>
               `).join('')}
             </div>
@@ -3366,7 +3342,7 @@ function renderSection5Longest() {
                 <div class="s5-session-turn-row">
                   <span class="s5-turn-num">#${(occ2?.start_pos || 1) + i}</span>
                   <span class="s5-turn-name">${name}</span>
-                  ${i < recordRun.members.length - 1 ? '<span style="color:var(--text-dim); margin-left:auto;">passed to →</span>' : '<span style="color:var(--strawberry-red); margin-left:auto; font-weight:700;">Final Finisher</span>'}
+                  ${i < recordRun.members.length - 1 ? '<span style="color:var(--text-dim); margin-left:auto;">passed to →</span>' : '<span style="color:var(--strawberry-red); margin-left:auto; font-weight:700;">Last Speaker</span>'}
                 </div>
               `).join('')}
             </div>
@@ -3376,13 +3352,13 @@ function renderSection5Longest() {
     `;
   }
 
-  // 2. Other notable long unbroken runs (Length >= 5)
-  const otherLong = longestRuns.filter(c => !recordRun || c.id !== recordRun.id);
+  // 2. Simplified view: only the record run is shown (other long runs hidden)
+  const otherLong = [];
   if (otherLong.length > 0) {
     html += `
       <div class="profile-card-block" style="padding: 16px 18px; margin-top: 14px;">
         <div class="block-header" style="margin-bottom: 12px; padding-bottom: 8px;">
-          <span class="block-title">Additional Record Sequences (Length 5+)</span>
+          <span class="block-title">Other Long Runs (5+)</span>
           <span class="block-badge">${otherLong.length} Chains</span>
         </div>
         <div class="s5-chains-grid">
@@ -3467,12 +3443,12 @@ function initSection6() {
   setText('s6-kpi-total-sub', `${s.overall_rate_pct}% of ${s.total_turns.toLocaleString()} hand-offs`);
   if (s.top_offender) {
     setText('s6-kpi-top', s.top_offender.name);
-    setText('s6-kpi-top-sub', `${s.top_offender.mistakes} slips • ${s.top_offender.rate_pct}% of turns`);
+    setText('s6-kpi-top-sub', `${s.top_offender.mistakes} ${s.top_offender.mistakes === 1 ? 'slip-up' : 'slip-ups'} • ${s.top_offender.rate_pct}% of turns`);
   }
   setText('s6-kpi-sessions', `${s.sessions_with_mistakes}`);
   setText('s6-kpi-sessions-sub', `${s.pct_sessions_with_mistakes}% of ${s.total_sessions} standups`);
   setText('s6-kpi-clean', `${s.mistake_free_count}`);
-  setText('s6-kpi-clean-sub', `of ${mk.members.length} teammates never slipped`);
+  setText('s6-kpi-clean-sub', `of ${mk.members.length} teammates had 0 slip-ups`);
   setText('s6-badge-rate', `${s.overall_rate_pct}% overall rate`);
   if (lateBucket) {
     const share = s.total_mistakes ? Math.round((lateBucket.mistakes / s.total_mistakes) * 100) : 0;
@@ -3483,8 +3459,7 @@ function initSection6() {
   const tabBtns = document.querySelectorAll('.s6-nav-row .tab-btn');
   const panels = {
     leaderboard: document.getElementById('s6-view-leaderboard'),
-    timing: document.getElementById('s6-view-timing'),
-    sessions: document.getElementById('s6-view-sessions')
+    timing: document.getElementById('s6-view-timing')
   };
   tabBtns.forEach(btn => {
     btn.addEventListener('click', () => {
@@ -3495,21 +3470,9 @@ function initSection6() {
     });
   });
 
-  // Filters
-  const fBtns = document.querySelectorAll('[data-s6-filter]');
-  fBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      fBtns.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      s6Filter = btn.dataset.s6Filter;
-      renderSection6Leaderboard();
-    });
-  });
-
   s6Selected = s.top_offender ? s.top_offender.name : (mk.members[0] && mk.members[0].name);
   renderSection6Leaderboard();
   renderSection6Timing();
-  renderSection6Sessions();
 }
 
 function renderSection6Leaderboard() {
@@ -3517,9 +3480,8 @@ function renderSection6Leaderboard() {
   const mk = metricsData.mistakes;
   if (!wrap || !mk) return;
 
-  let list = [...mk.members];
-  if (s6Filter === 'offenders') list = list.filter(m => m.mistakes > 0);
-  else if (s6Filter === 'clean') list = list.filter(m => m.mistakes === 0);
+  // Always show full list of teammates sorted by diff and mistakes
+  const list = [...mk.members];
   list.sort((a, b) => b.diff - a.diff || b.mistakes - a.mistakes);
 
   if (!list.length) {
@@ -3572,9 +3534,11 @@ function renderSection6Inspector(name) {
   const diffStr = m.diff > 0 ? `+${m.diff}` : `${m.diff}`;
   const diffColor = m.diff > 0 ? 'var(--strawberry-red)' : 'var(--pacific-blue)';
   const verdict = m.mistakes === 0
-    ? `Clean sheet across ${m.turns} hand-offs.`
-    : (m.diff > 1 ? `Slips noticeably more than the timing of their turns would predict.`
-      : (m.diff < -1 ? `Slips less than their late-turn exposure would predict.` : `Right in line with what their turn positions predict.`));
+    ? `No slip-ups across ${m.turns} turns.`
+    : (m.mistakes === 1
+      ? `1 slip-up across ${m.turns} turns (${diffStr} vs expected).`
+      : (m.diff > 1 ? `Slips more often than expected for their turn timing.`
+        : (m.diff < -1 ? `Slips less often than expected for their turn timing.` : `Right in line with what you would expect.`)));
 
   body.innerHTML = `
     <div class="s5-inspector-card">
@@ -3583,9 +3547,9 @@ function renderSection6Inspector(name) {
         <span class="stat-value highlight-red" style="font-size:1.1rem;line-height:1;">${m.mistakes}x</span>
       </div>
       <div class="s5-insp-stat-grid">
-        <div class="s5-insp-stat-item"><span class="s5-insp-stat-label">Slip Rate</span><span class="s5-insp-stat-val">${m.rate_pct}%</span></div>
+        <div class="s5-insp-stat-item"><span class="s5-insp-stat-label">Slip-Up Rate</span><span class="s5-insp-stat-val">${m.rate_pct}%</span></div>
         <div class="s5-insp-stat-item"><span class="s5-insp-stat-label">vs Expected</span><span class="s5-insp-stat-val" style="color:${diffColor};">${diffStr} (exp ${m.expected})</span></div>
-        <div class="s5-insp-stat-item"><span class="s5-insp-stat-label">Avg Slip Turn</span><span class="s5-insp-stat-val">${m.avg_turn_pos != null ? 'Turn #' + m.avg_turn_pos : '—'}</span></div>
+        <div class="s5-insp-stat-item"><span class="s5-insp-stat-label">Avg Slip-Up Turn</span><span class="s5-insp-stat-val">${m.avg_turn_pos != null ? 'Turn #' + m.avg_turn_pos : '—'}</span></div>
         <div class="s5-insp-stat-item"><span class="s5-insp-stat-label">Session Depth</span><span class="s5-insp-stat-val">${m.avg_turn_pct != null ? m.avg_turn_pct + '%' : '—'}</span></div>
       </div>
       <div style="font-size:0.76rem;color:var(--text-muted);line-height:1.4;">${verdict}</div>
@@ -3627,8 +3591,8 @@ function renderSection6Timing() {
 
   grid.innerHTML = `
     <div class="s6-panel">
-      <div class="s6-panel-title">Slip rate by point in the session</div>
-      <div class="s6-panel-sub">Share of hand-offs that were mistakes, split into thirds of the speaking order</div>
+      <div class="s6-panel-title">Slip-up rate by point in the session</div>
+      <div class="s6-panel-sub">Percentage of turns that were mistakes, split into thirds of the standup</div>
       ${timingHtml}
     </div>
     <div class="s6-panel">
