@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="Harbor Cargo - Fullscreen open-water containership salvage for Stand-Up Wrapped.">
+  <title>Harbor Cargo — Containership</title>
+  <link rel="stylesheet" href="style.css?v=57">
+  <style>
+    :root {
+      --ocean-deep: #0a2533;
+      --ocean-mid: #123e52;
+      --ocean-light: #1b536b;
+      --foam-white: rgba(244, 237, 219, 0.85);
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background-color: var(--ocean-deep);
+      font-family: var(--font-sans);
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    /* Full-screen Canvas: Entire Window is Playable */
+    #gameCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      display: block;
+      z-index: 1;
+      cursor: crosshair;
+    }
+
+    /* Floating Translucent Top Controls (Non-obtrusive overlay) */
+    .floating-top-bar {
+      position: fixed;
+      top: 16px;
+      left: 20px;
+      right: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 20;
+      pointer-events: none;
+    }
+
+    .floating-top-bar * {
+      pointer-events: auto;
+    }
+
+    .game-back-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--eggshell);
+      background: rgba(10, 37, 51, 0.85);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(244, 237, 219, 0.25);
+      padding: 8px 16px;
+      border-radius: 20px;
+      text-decoration: none;
+      font-size: 0.84rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+      transition: all 0.15s ease;
+    }
+
+    .game-back-pill:hover {
+      background: var(--yale-blue);
+      border-color: var(--pacific-blue);
+      color: #ffffff;
+      transform: translateX(-2px);
+    }
+
+    .game-title-badge {
+      font-family: var(--font-serif);
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--eggshell);
+      background: rgba(10, 37, 51, 0.75);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(244, 237, 219, 0.18);
+      padding: 6px 18px;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+    }
+
+    .top-actions {
+      display: flex;
+      gap: 10px;
+    }
+
+    .floating-btn {
+      background: rgba(10, 37, 51, 0.85);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(244, 237, 219, 0.25);
+      color: var(--eggshell);
+      padding: 8px 16px;
+      font-size: 0.82rem;
+      cursor: pointer;
+      border-radius: 20px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-mono);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+      transition: all 0.15s ease;
+    }
+
+    .floating-btn:hover {
+      background: var(--yale-blue);
+      border-color: var(--pacific-blue);
+    }
+
+    .floating-btn.horn-btn:active {
+      background: var(--strawberry-red);
+      border-color: var(--strawberry-red);
+      transform: scale(0.95);
+    }
+
+    /* Minimal Bottom Control Hint */
+    .floating-bottom-hint {
+      position: fixed;
+      bottom: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(10, 37, 51, 0.75);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(244, 237, 219, 0.18);
+      padding: 6px 18px;
+      border-radius: 20px;
+      font-size: 0.76rem;
+      color: rgba(244, 237, 219, 0.8);
+      font-family: var(--font-mono);
+      z-index: 20;
+      pointer-events: none;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    }
+
+    .key-badge {
+      display: inline-block;
+      padding: 1px 6px;
+      background: rgba(244, 237, 219, 0.15);
+      border: 1px solid rgba(244, 237, 219, 0.3);
+      border-radius: 3px;
+      color: var(--eggshell);
+      font-weight: bold;
+    }
+
+    /* Start Screen Modal Overlay */
+    .game-modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(10, 37, 51, 0.88);
+      backdrop-filter: blur(6px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 24px;
+      z-index: 50;
+      transition: opacity 0.25s ease;
+    }
+
+    .game-modal-overlay.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .modal-badge {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      font-family: var(--font-mono);
+      letter-spacing: 0.12em;
+      color: var(--pacific-blue);
+      border: 1px solid var(--pacific-blue);
+      padding: 3px 12px;
+      border-radius: 20px;
+      margin-bottom: 12px;
+    }
+
+    .modal-title {
+      font-family: var(--font-serif);
+      font-size: 2.4rem;
+      font-weight: 700;
+      color: var(--eggshell);
+      margin-bottom: 8px;
+    }
+
+    .modal-desc {
+      font-size: 1rem;
+      max-width: 520px;
+      color: rgba(244, 237, 219, 0.85);
+      line-height: 1.55;
+      margin-bottom: 28px;
+    }
+
+    .play-btn {
+      background: var(--strawberry-red);
+      color: var(--eggshell);
+      border: none;
+      padding: 14px 40px;
+      font-size: 1.05rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      cursor: pointer;
+      border-radius: 4px;
+      box-shadow: 0 4px 16px rgba(232, 63, 64, 0.45);
+      transition: all 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .play-btn:hover {
+      background: #f15253;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(232, 63, 64, 0.6);
+    }
+
+    /* Mobile Touch Controls */
+    .touch-controls {
+      display: none;
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      right: 20px;
+      z-index: 25;
+      gap: 10px;
+      pointer-events: none;
+    }
+
+    @media (max-width: 768px), (pointer: coarse) {
+      .touch-controls {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+      }
+      .floating-bottom-hint {
+        display: none;
+      }
+    }
+
+    .touch-btn {
+      pointer-events: auto;
+      padding: 14px 6px;
+      background: rgba(18, 62, 82, 0.85);
+      backdrop-filter: blur(6px);
+      border: 1px solid rgba(244, 237, 219, 0.25);
+      border-radius: 8px;
+      color: var(--eggshell);
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      touch-action: manipulation;
+    }
+
+    .touch-btn:active {
+      background: var(--pacific-blue);
+      color: var(--ocean-deep);
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Fullscreen Canvas -->
+  <canvas id="gameCanvas"></canvas>
+
+  <!-- Floating Minimal Header -->
+  <header class="floating-top-bar" aria-label="Game controls">
+    <a href="index.html" class="game-back-pill">
+      <svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor">
+        <path d="M10 13L5 8l5-5v10z"/>
+      </svg>
+      <span>Stand-Up Wrapped</span>
+    </a>
+
+    <div class="game-title-badge">
+      <span>🚢</span>
+      <span>Harbor Cargo</span>
+    </div>
+
+    <div class="top-actions">
+      <button type="button" class="floating-btn horn-btn" id="btn-horn" aria-label="Sound ship's foghorn">
+        <span>📯</span>
+        <span>Foghorn</span>
+      </button>
+      <button type="button" class="floating-btn" id="btn-sound-toggle" aria-label="Toggle sound">
+        <span id="sound-icon">🔊</span>
+        <span id="sound-label">Audio</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Floating Minimal Controls Hint -->
+  <div class="floating-bottom-hint">
+    <span>Steer: <span class="key-badge">←</span> <span class="key-badge">→</span> or <span class="key-badge">A</span> <span class="key-badge">D</span></span>
+    <span>Throttle: <span class="key-badge">↑</span> <span class="key-badge">W</span> (Ahead) / <span class="key-badge">↓</span> <span class="key-badge">S</span> (Astern)</span>
+    <span>Foghorn: <span class="key-badge">Space</span></span>
+    <span>Click / Drag anywhere to steer</span>
+  </div>
+
+  <!-- Mobile Touch Controls -->
+  <div class="touch-controls">
+    <button type="button" class="touch-btn" id="btn-touch-port" aria-label="Steer Port">
+      <span>◀</span> <span>Port</span>
+    </button>
+    <button type="button" class="touch-btn" id="btn-touch-ahead" aria-label="Engine Ahead">
+      <span>▲</span> <span>Ahead</span>
+    </button>
+    <button type="button" class="touch-btn" id="btn-touch-astern" aria-label="Engine Astern">
+      <span>▼</span> <span>Astern</span>
+    </button>
+    <button type="button" class="touch-btn" id="btn-touch-starboard" aria-label="Steer Starboard">
+      <span>▶</span> <span>Starboard</span>
+    </button>
+  </div>
+
+  <!-- Initial Start Modal -->
+  <div class="game-modal-overlay" id="modal-start">
+    <span class="modal-badge">Stand-Up Wrapped Secret Voyage</span>
+    <h1 class="modal-title">Harbor Cargo</h1>
+    <p class="modal-desc">
+      Pilot your containership freely across the open water harbor! Containers appear in different spots—maneuver to scoop them up onto your deck bays. No time limits, no scores—just enjoy the open waters.
+    </p>
+    <button type="button" class="play-btn" id="btn-start-game">
+      <span>🚢 Cast Off</span>
+    </button>
+  </div>
+
+  <script src="game.js?v=3"></script>
+</body>
+
+</html>
